@@ -3,11 +3,13 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/bootstrap/ScopedLock.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/bootstrap/Mutex.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/bootstrap/ex1.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/bootstrap/Mutex.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/bootstrap/IMutex.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/bootstrap/ScopedLock.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/bootstrap/ISafeQueue.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/bootstrap/Thread.hpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/bootstrap/Mutex.hpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />

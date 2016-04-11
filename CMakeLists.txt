@@ -9,6 +9,6 @@ set(SOURCE_FILES
     bootstrap/ISafeQueue.hpp
     bootstrap/Mutex.hpp
     bootstrap/ScopedLock.hpp
-    bootstrap/Thread.hpp)
+    bootstrap/Thread.hpp bootstrap/Mutex.cpp bootstrap/ScopedLock.cpp)
 
 add_executable(cpp_plazza ${SOURCE_FILES})
