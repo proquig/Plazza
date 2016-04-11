@@ -16,12 +16,13 @@
 class ScopedLock
 {
 private:
-  Mutex _mutex;
+    Mutex _mutex;
 
 public:
   ScopedLock (const Mutex &);
   virtual ~ScopedLock ();
 
+    ScopedLock();
 };
 
 #endif

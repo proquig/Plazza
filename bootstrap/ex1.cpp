@@ -11,10 +11,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "Mutex.hpp"
+#include "ScopedLock.hpp"
 
 typedef struct  count {
-    int var;
-    Mutex mutex;
+    int         var;
+    Mutex       mutex;
 }               count;
 
 void init(count *c)
@@ -22,12 +23,15 @@ void init(count *c)
   c->var = 0;
 }
 
-void *increment_counter(void *N){
+void *increment_counter(void *N)
+{
     count *param = static_cast<count *>(N);
-    for (size_t i = 0; i < 1000000; i++) {
-      param->mutex.lock();
+
+    for (size_t i = 0; i < 1000000; i++)
+    {
+      ScopedLock *scp = new ScopedLock(param->mutex);
       ++(param->var);
-      param->mutex.unlock();
+      delete scp;
     }
   return NULL;
 }
@@ -39,12 +43,12 @@ int main()
   count       c;
 
   init(&c);
-  printf("test avec mutext\n");
+  printf("test avec mutex\n");
   pthread_create(&pt1, NULL, &increment_counter, &c);
   pthread_create(&pt2, NULL, &increment_counter, &c);
 
   pthread_join(pt1, NULL);
   pthread_join(pt2, NULL);
-  printf("test avec mutext :[%i]\n", c.var);
+  printf("test avec mutex :[%i]\n", c.var);
   return 0;
 }

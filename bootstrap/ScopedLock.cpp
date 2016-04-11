@@ -13,3 +13,4 @@ ScopedLock::~ScopedLock()
 {
     _mutex.unlock();
 }
+
