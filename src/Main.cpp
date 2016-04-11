@@ -14,7 +14,12 @@ Plazza::Main::Main(int argc, char **argv) {
     if (argc < 2)
         this->usage(argv[0]);
     else
-        this->maxThreads = std::stoul(argv[0]);
+        try {
+            this->maxThreads = std::stoul(argv[1]);
+        } catch (std::invalid_argument e) {
+            this->usage(argv[0]);
+        }
+
     OrderReader(this->orders);
 }
 
