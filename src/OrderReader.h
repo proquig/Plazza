@@ -7,10 +7,22 @@
 
 
 #include <thread>
+#include <queue>
+#include "IOrder.h"
 
-class OrderReader {
-    std::thread thread;
-};
+namespace Plazza {
+    class OrderReader {
+        std::queue<IOrder *> orders;
+
+    public:
+        OrderReader(std::queue<IOrder *> orders);
+
+    private:
+        void parseLine(const std::string &line);
+
+        void parseCommand(const std::string &command);
+    };
+}
 
 
 #endif //CPP_PLAZZA_ORDERREADER_H
