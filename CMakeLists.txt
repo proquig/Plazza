@@ -18,6 +18,8 @@ set(
         src/orders/EmailAddress.h
         src/orders/IpAddress.cpp
         src/orders/IpAddress.h
+        src/process/ThreadPool.cpp
+        src/process/ThreadPool.h
 )
 
 add_executable(cpp_plazza ${SOURCE_FILES})
