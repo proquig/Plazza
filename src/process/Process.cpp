@@ -13,11 +13,15 @@ Plazza::Process::Process(unsigned int maxThreads) : maxThreads(maxThreads) {
     // TODO : throw exception
 }
 
+Plazza::Process::~Process() {
+
+}
+
 bool Plazza::Process::canAcceptOrder() {
     return (this->orders.size() < this->maxThreads);
 }
 
-void Plazza::Process::addOrder(IOrder *order) {
+void Plazza::Process::pushOrder(IOrder *order) {
     if (canAcceptOrder())
         this->orders.push(order);
     else {} // TODO : throw exception

@@ -7,8 +7,8 @@ set(
         SOURCE_FILES
         src/Main.cpp
         src/Main.h
-        src/Process.cpp
-        src/Process.h
+        src/process/Process.cpp
+        src/process/Process.h
         src/IOrder.h
         src/OrderReader.cpp
         src/OrderReader.h

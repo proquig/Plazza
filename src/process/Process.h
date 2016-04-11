@@ -8,23 +8,25 @@
 
 #include <queue>
 #include <thread>
-#include "IOrder.h"
+#include "../IOrder.h"
 
 namespace Plazza {
     class Process {
-        unsigned int maxThreads;
-        std::queue<IOrder *const &> orders;
+        unsigned long maxThreads;
+        std::queue<IOrder *> orders;
         pid_t pid;
         std::vector<std::thread> threads;
 
     public:
         Process(unsigned int maxThreads);
 
+        ~Process();
+
         bool canAcceptOrder();
 
-        void addOrder(IOrder *order);
+        void pushOrder(IOrder *order);
 
-        void deleteOrder(IOrder *order);
+        void deleteOrder();
     };
 }
 
