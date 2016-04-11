@@ -5,6 +5,7 @@
 #ifndef CPP_PLAZZA_IORDER_H
 #define CPP_PLAZZA_IORDER_H
 
+#include <string>
 
 namespace Plazza {
     class IOrder {
@@ -12,6 +13,8 @@ namespace Plazza {
         virtual ~IOrder() {}
 
         virtual void execute() = 0;
+
+        virtual void setOrigin(const std::string &origin) = 0;
     };
 }
 
