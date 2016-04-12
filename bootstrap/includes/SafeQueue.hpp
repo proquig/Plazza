@@ -39,7 +39,7 @@ SafeQueue<T>::~SafeQueue(void)
 template <typename T>
 void SafeQueue<T>::push(T value)
 {
-	this->_queue.push(value);
+  this->_queue.push(value);
 }
 
 template <typename T>
@@ -53,13 +53,13 @@ bool SafeQueue<T>::tryPop(T* value)
 template <typename T>
 bool SafeQueue<T>::isFinished(void)
 {
-  	return (this->_finish && this->_queue.empty());
+  return (this->_finish && this->_queue.empty());
 }
 
 template <typename T>
 void SafeQueue<T>::setFinished(void)
 {
-	this->_finish = true;
+  this->_finish = true;
 }
 
 #endif //CPP_PLAZZA_SAFEQUEUE_HPP
