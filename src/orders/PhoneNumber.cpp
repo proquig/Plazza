@@ -5,8 +5,12 @@
 #include <string>
 #include "PhoneNumber.h"
 
+Plazza::PhoneNumber::~PhoneNumber()
+{
+
+}
+
 std::string Plazza::PhoneNumber::getRegex() const
 {
   return this->_regex;
 }
-

@@ -15,8 +15,6 @@ namespace Plazza
     virtual ~IOrder()
     { }
 
-    virtual void execute() = 0;
-
     virtual std::string getRegex() const = 0;
   };
 }

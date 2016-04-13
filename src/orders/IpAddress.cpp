@@ -3,3 +3,13 @@
 //
 
 #include "IpAddress.h"
+
+Plazza::IpAddress::~IpAddress()
+{
+
+}
+
+std::string Plazza::IpAddress::getRegex() const
+{
+  return this->_regex;
+}
