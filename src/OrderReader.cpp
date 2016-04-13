@@ -7,31 +7,34 @@
 #include <algorithm>
 #include "OrderReader.h"
 
-Plazza::OrderReader::OrderReader(std::queue<IOrder *> orders) : orders(orders){
-    std::string line;
-    while (std::cin)
+Plazza::OrderReader::OrderReader(std::queue<IOrder *> orders) : orders(orders)
+{
+  std::string line;
+  while (std::cin)
     {
-        std::getline(std::cin, line);
-        parseLine(line);
+      std::getline(std::cin, line);
+      parseLine(line);
     }
 }
 
-void Plazza::OrderReader::parseCommand(const std::string &command) {
-    std::vector<std::string> files;
-    std::string type;
-    IOrder *order;
+void Plazza::OrderReader::parseCommand(const std::string &command)
+{
+  std::vector<std::string> files;
+  std::string type;
+  IOrder *order;
 
-    // TODO :create order
+  // TODO :create order
 
-    this->orders.push(order);
+  this->orders.push(order);
 }
 
-void Plazza::OrderReader::parseLine(const std::string &line) {
-    std::vector<std::string> commands;
+void Plazza::OrderReader::parseLine(const std::string &line)
+{
+  std::vector<std::string> commands;
 
-    // TODO : create commands
+  // TODO : create commands
 
-    for (std::vector<std::string>::iterator it; it != commands.end(); it++)
-        parseCommand(*it);
+  for (std::vector<std::string>::iterator it; it != commands.end(); it++)
+    parseCommand(*it);
 }
 

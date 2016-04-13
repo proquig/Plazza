@@ -6,7 +6,8 @@
 #define CPP_PLAZZA_EMAILADDRESS_H
 
 
-class EmailAddress {
+class EmailAddress
+{
 
 };
 

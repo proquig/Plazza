@@ -7,15 +7,18 @@
 
 #include <string>
 
-namespace Plazza {
-    class IOrder {
-    public:
-        virtual ~IOrder() {}
+namespace Plazza
+{
+  class IOrder
+  {
+   public:
+    virtual ~IOrder()
+    { }
 
-        virtual void execute() = 0;
+    virtual void execute() = 0;
 
-        virtual void setOrigin(const std::string &origin) = 0;
-    };
+    virtual void setOrigin(const std::string &origin) = 0;
+  };
 }
 
 

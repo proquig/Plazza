@@ -13,6 +13,7 @@ set(
         src/orders/IpAddress.h
         src/process/Process.cpp
         src/process/Process.h
+        src/utils/SafeQueue.hpp
         src/IOrder.h
         src/Main.cpp
         src/Main.h

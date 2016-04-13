@@ -6,7 +6,8 @@
 #define CPP_PLAZZA_IPADDRESS_H
 
 
-class IpAddress {
+class IpAddress
+{
 
 };
 

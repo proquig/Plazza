@@ -5,10 +5,10 @@
 #ifndef CPP_PLAZZA_SAFEQUEUE_HPP
 #define CPP_PLAZZA_SAFEQUEUE_HPP
 
-#include "ISafeQueue.hpp"
+#include "../../bootstrap/includes/ISafeQueue.hpp"
 #include <queue>
-#include "CondVar.hpp"
-#include "Exception.hpp"
+#include "../../bootstrap/includes/CondVar.hpp"
+#include "../../bootstrap/includes/Exception.hpp"
 
 template <typename T>
 class SafeQueue : public  ISafeQueue<T>

@@ -8,15 +8,17 @@
 #include <fstream>
 #include "../IOrder.h"
 
-namespace Plazza {
-    class PhoneNumber : public IOrder {
-        std::ifstream file;
+namespace Plazza
+{
+  class PhoneNumber : public IOrder
+  {
+    std::ifstream file;
 
-    public:
-        virtual void setOrigin(const std::string &file) override;
+   public:
+    virtual void setOrigin(const std::string &file) override;
 
-        virtual void execute() override ;
-    };
+    virtual void execute() override;
+  };
 }
 
 

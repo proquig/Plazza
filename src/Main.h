@@ -10,22 +10,24 @@
 #include "IOrder.h"
 #include "process/Process.h"
 
-namespace Plazza {
-    class Main {
-        std::queue<IOrder *> orders;
-        std::vector<Process> process;
-        unsigned long maxThreads;
+namespace Plazza
+{
+  class Main
+  {
+    std::queue<IOrder *> orders;
+    std::vector<Process> process;
+    unsigned long maxThreads;
 
-    public:
-        Main(int argc, char *argv[]);
+   public:
+    Main(int argc, char *argv[]);
 
-        ~Main();
+    ~Main();
 
-        void pushOrder(IOrder *order);
+    void createProcess();
 
-    private:
-        void usage(char *name);
-    };
+   private:
+    void usage(char *name);
+  };
 }
 
 

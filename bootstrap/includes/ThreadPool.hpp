@@ -11,7 +11,7 @@
 #include <condition_variable>
 #include <vector>
 
-#include "SafeQueue.hpp"
+#include "../../src/utils/SafeQueue.hpp"
 
 /*
  * class

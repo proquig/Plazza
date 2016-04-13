@@ -10,18 +10,20 @@
 #include <queue>
 #include "IOrder.h"
 
-namespace Plazza {
-    class OrderReader {
-        std::queue<IOrder *> orders;
+namespace Plazza
+{
+  class OrderReader
+  {
+    std::queue<IOrder *> orders;
 
-    public:
-        OrderReader(std::queue<IOrder *> orders);
+   public:
+    OrderReader(std::queue<IOrder *> orders);
 
-    private:
-        void parseLine(const std::string &line);
+   private:
+    void parseLine(const std::string &line);
 
-        void parseCommand(const std::string &command);
-    };
+    void parseCommand(const std::string &command);
+  };
 }
 
 
