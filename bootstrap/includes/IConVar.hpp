@@ -5,6 +5,7 @@
 #ifndef CPP_PLAZZA_ICONVAR_HPP
 #define CPP_PLAZZA_ICONVAR_HPP
 
+#include <pthread.h>
 
 class IConVar
 {

@@ -5,8 +5,9 @@ class ISafeQueue
 {
   public:
   virtual ~ISafeQueue(void);
-  virtual void push(T value) = 0;
-  virtual bool tryPop(T* value) = 0;
+  virtual int pop(void) = 0;
+  virtual void push(const T value) = 0;
+  virtual bool tryPop(const T* value) = 0;
   virtual bool isFinished(void) = 0;
   virtual void setFinished(void) = 0;
 };

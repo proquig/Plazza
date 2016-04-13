@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "Mutex.hpp"
 #include "SafeQueue.hpp"
+#include "CondVar.hpp"
 
 typedef struct  	count {
     int			var;
@@ -54,9 +55,11 @@ void *decrement_counter(void *N)
 
 int main()
 {
+  ConVar	var;
   pthread_t pt1;
   pthread_t pt2;
   count       c;
+
 
   init(&c);
   printf("test avec mutex\n");

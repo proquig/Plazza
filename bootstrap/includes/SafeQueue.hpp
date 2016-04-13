@@ -7,6 +7,8 @@
 
 #include "ISafeQueue.hpp"
 #include <queue>
+#include "CondVar.hpp"
+#include "Exception.hpp"
 
 template <typename T>
 class SafeQueue : public  ISafeQueue<T>
@@ -14,19 +16,33 @@ class SafeQueue : public  ISafeQueue<T>
  private:
   std::queue<T> _queue;
   bool 		_finish;
+  ConVar	_conVar;
 
  public:
   SafeQueue();
   ~SafeQueue(void);
-  void push(T value);
-  bool tryPop(T* value);
+  int pop(void);
+  void push(const T value);
+  bool tryPop(const T* value);
   bool isFinished(void);
   void setFinished(void);
 };
 
 template <typename T>
+int SafeQueue<T>::pop(void)
+{
+  if (this->_finish)
+    throw(exception("Can't fill an empty Queue."));
+  if (this->_queue.empty())
+    this->_conVar.wait();
+  this->_queue.pop();
+  return (0);
+}
+
+template <typename T>
 SafeQueue<T>::SafeQueue()
 {
+  this->_finish = false;
   std::cout << "Création SafeQueue" << std::endl;
 }
 
@@ -37,13 +53,14 @@ SafeQueue<T>::~SafeQueue(void)
 }
 
 template <typename T>
-void SafeQueue<T>::push(T value)
+void SafeQueue<T>::push(const T value)
 {
+  this->_conVar.signal();
   this->_queue.push(value);
 }
 
 template <typename T>
-bool SafeQueue<T>::tryPop(T* value)
+bool SafeQueue<T>::tryPop(const T* value)
 {
   if (this->_queue.empty())
     return false;
