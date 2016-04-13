@@ -12,12 +12,10 @@ namespace Plazza
 {
   class PhoneNumber : public IOrder
   {
-    std::ifstream file;
+    const std::string _regex = "(0|\\+33|0033)[1-9][0-9]{8}";
 
    public:
-    virtual void setOrigin(const std::string &file) override;
-
-    virtual void execute() override;
+    virtual std::string getRegex() const override;
   };
 }
 

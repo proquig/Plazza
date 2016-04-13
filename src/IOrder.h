@@ -17,7 +17,7 @@ namespace Plazza
 
     virtual void execute() = 0;
 
-    virtual void setOrigin(const std::string &origin) = 0;
+    virtual std::string getRegex() const = 0;
   };
 }
 

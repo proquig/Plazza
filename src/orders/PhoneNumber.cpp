@@ -5,10 +5,8 @@
 #include <string>
 #include "PhoneNumber.h"
 
-void Plazza::PhoneNumber::execute() {
-
+std::string Plazza::PhoneNumber::getRegex() const
+{
+  return this->_regex;
 }
 
-void Plazza::PhoneNumber::setOrigin(const std::string &file) {
-    this->file = std::ifstream(file);
-}
