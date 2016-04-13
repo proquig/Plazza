@@ -20,6 +20,6 @@ set(
         src/orders/IpAddress.h
         src/process/ThreadPool.cpp
         src/process/ThreadPool.h
-)
+        bootstrap/SafeQueue.cpp bootstrap/includes/SafeQueue.hpp bootstrap/IConVar.cpp bootstrap/includes/IConVar.hpp bootstrap/SafeQueue.cpp bootstrap/includes/CondVar.hpp bootstrap/includes/ThreadPool.cpp bootstrap/includes/ThreadPool.hpp)
 
 add_executable(cpp_plazza ${SOURCE_FILES})
