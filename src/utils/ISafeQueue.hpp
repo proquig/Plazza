@@ -10,7 +10,7 @@ class ISafeQueue
 
   virtual void push(const T value) = 0;
 
-  virtual bool tryPop(const T *value) = 0;
+  virtual bool tryPop(T *value) = 0;
 };
 
 template<typename T>

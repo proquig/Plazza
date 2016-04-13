@@ -26,7 +26,7 @@ class SafeQueue : public ISafeQueue<T>
 
   void push(const T value);
 
-  bool tryPop(const T *value);
+  bool tryPop(T *value);
 };
 
 template<typename T>
@@ -52,23 +52,21 @@ SafeQueue<T>::~SafeQueue(void)
 template<typename T>
 void SafeQueue<T>::push(const T value)
 {
-  std::lock_guard *lock_guard = new std::lock_guard(_mutex);
+  std::lock_guard<std::mutex> lock_guard(_mutex);
   this->_conVar.notify_one();
   this->_queue.push(value);
-  delete lock_guard;
 }
 
 template<typename T>
-bool SafeQueue<T>::tryPop(const T *value)
+bool SafeQueue<T>::tryPop(T *value)
 {
   if (this->_queue.empty())
     return false;
   else
     {
-      std::lock_guard *lock_guard = new std::lock_guard(_mutex);
+      std::lock_guard<std::mutex> lock_guard(_mutex);
       *value = this->_queue.front();
       this->_queue.pop();
-      delete lock_guard;
       return true;
     }
 }
