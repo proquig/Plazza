@@ -7,6 +7,7 @@
 #include "Main.h"
 #include "OrderReader.h"
 #include "utils/SafeQueue.hpp"
+#include "utils/Fork.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -43,11 +44,11 @@ void Plazza::Main::usage(char *name)
 
 void Plazza::Main::createProcess()
 {
-  pid_t pid;
+  Fork proc;
 
-  pid = fork();
-  if (pid == 0)
+  if (proc.getPid() == 0)
     {
+      //TODO:Sucer la bite de Popo
     }
 }
 
