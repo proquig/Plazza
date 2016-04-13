@@ -6,26 +6,27 @@
 #include <unistd.h>
 #include "Main.h"
 #include "OrderReader.h"
+#include "utils/SafeQueue.hpp"
 
 int main(int argc, char *argv[])
 {
   Plazza::Main(argc, argv);
 }
 
-Plazza::Main::Main(int argc, char **argv)
+Plazza::Main::Main(int argc, char **argv) : _ordersQueue(new SafeQueue<IOrder *>())
 {
   if (argc < 2)
     this->usage(argv[0]);
   else
     try
       {
-	this->maxThreads = std::stoul(argv[1]);
+	this->_maxThreads = std::stoul(argv[1]);
       } catch (std::invalid_argument e)
       {
 	this->usage(argv[0]);
       }
 
-  OrderReader(this->orders);
+  //OrderReader(this->_ordersQueue);
 }
 
 Plazza::Main::~Main()
@@ -47,7 +48,6 @@ void Plazza::Main::createProcess()
   pid = fork();
   if (pid == 0)
     {
-      Process(this->maxThreads);
     }
 }
 

@@ -6,17 +6,15 @@
 #define CPP_PLAZZA_MAIN_H
 
 
-#include <queue>
 #include "IOrder.h"
-#include "process/Process.h"
+#include "utils/ISafeQueue.hpp"
 
 namespace Plazza
 {
   class Main
   {
-    std::queue<IOrder *> orders;
-    std::vector<Process> process;
-    unsigned long maxThreads;
+    ISafeQueue<IOrder *> *_ordersQueue;
+    unsigned long _maxThreads;
 
    public:
     Main(int argc, char *argv[]);
