@@ -5,78 +5,72 @@
 #ifndef CPP_PLAZZA_SAFEQUEUE_HPP
 #define CPP_PLAZZA_SAFEQUEUE_HPP
 
-#include "../../bootstrap/includes/ISafeQueue.hpp"
 #include <queue>
-#include "../../bootstrap/includes/CondVar.hpp"
-#include "../../bootstrap/includes/Exception.hpp"
+#include <condition_variable>
+#include "Exception.hpp"
 
-template <typename T>
-class SafeQueue : public  ISafeQueue<T>
+template<typename T>
+class SafeQueue : public ISafeQueue<T>
 {
  private:
   std::queue<T> _queue;
-  bool 		_finish;
-  ConVar	_conVar;
+  std::condition_variable _conVar;
+  std::mutex _mutex;
 
  public:
   SafeQueue();
+
   ~SafeQueue(void);
+
   int pop(void);
+
   void push(const T value);
-  bool tryPop(const T* value);
-  bool isFinished(void);
-  void setFinished(void);
+
+  bool tryPop(const T *value);
 };
 
-template <typename T>
+template<typename T>
 int SafeQueue<T>::pop(void)
 {
-  if (this->_finish)
-    throw(exception("Can't fill an empty Queue."));
   if (this->_queue.empty())
-    this->_conVar.wait();
+    { }//this->_conVar.wait();
   this->_queue.pop();
   return (0);
 }
 
-template <typename T>
+template<typename T>
 SafeQueue<T>::SafeQueue()
 {
-  this->_finish = false;
   std::cout << "Création SafeQueue" << std::endl;
 }
 
-template <typename T>
+template<typename T>
 SafeQueue<T>::~SafeQueue(void)
 {
-  std::cout << "Destruction SafeQueue" << std::endl;
 }
 
-template <typename T>
+template<typename T>
 void SafeQueue<T>::push(const T value)
 {
-  this->_conVar.signal();
+  std::lock_guard *lock_guard = new std::lock_guard(_mutex);
+  this->_conVar.notify_one();
   this->_queue.push(value);
+  delete lock_guard;
 }
 
-template <typename T>
-bool SafeQueue<T>::tryPop(const T* value)
+template<typename T>
+bool SafeQueue<T>::tryPop(const T *value)
 {
   if (this->_queue.empty())
     return false;
-  this->_queue.pop();
-}
-
-template <typename T>
-bool SafeQueue<T>::isFinished(void)
-{
-  return (this->_finish && this->_queue.empty());
-}
-
-template <typename T>
-void SafeQueue<T>::setFinished(void)
-{
-  this->_finish = true;
+  else
+    {
+      std::lock_guard *lock_guard = new std::lock_guard(_mutex);
+      *value = this->_queue.front();
+      this->_queue.pop();
+      delete lock_guard;
+      return true;
+    }
 }
 
 #endif //CPP_PLAZZA_SAFEQUEUE_HPP
