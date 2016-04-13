@@ -11,7 +11,7 @@ Fork::Fork()
 
 pid_t &Fork::getPid() const
 {
-  return _pid
+  return _pid;
 }
 
 Fork::~Fork()
