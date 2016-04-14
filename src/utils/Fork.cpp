@@ -18,3 +18,8 @@ Fork::~Fork()
 {
 
 }
+
+bool Fork::isChild() const
+{
+  return this->_pid == 0;
+}
