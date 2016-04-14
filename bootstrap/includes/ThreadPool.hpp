@@ -13,9 +13,6 @@
 
 #include "../../src/utils/SafeQueue.hpp"
 
-/*
- * class
-*/
 class ThreadPool
 {
   SafeQueue<std::function<void ()> > 	_tasks;

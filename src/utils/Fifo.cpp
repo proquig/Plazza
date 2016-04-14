@@ -30,7 +30,7 @@ std::string 	&Fifo::readIn()
   std::string str;
   std::string res;
   bool done = false;
-  
+
   while (!done)
     {
       while(std::getline(fifo, str))
