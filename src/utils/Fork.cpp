@@ -6,15 +6,20 @@
 
 Fork::Fork()
 {
-  _pid = fork();
+  this->_pid = fork();
 }
 
 pid_t &Fork::getPid() const
 {
-  return _pid;
+  return this->_pid;
 }
 
 Fork::~Fork()
 {
 
+}
+
+bool Fork::isChild() const
+{
+  return this->_pid == 0;
 }

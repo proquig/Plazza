@@ -7,15 +7,19 @@
 
 #include <unistd.h>
 
-class 		Fork
+class Fork
 {
  private:
-  pid_t 	_pid;
+  pid_t _pid;
 
  public:
   Fork();
+
   ~Fork();
-  pid_t 	&getPid() const;
+
+  pid_t &getPid() const;
+
+  bool isChild() const;
 };
 
 

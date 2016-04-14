@@ -41,14 +41,3 @@ void Plazza::Main::usage(char *name)
   << "\t threads: a positive integer which determine the maximum number of threads per processus"
   << std::endl;
 }
-
-void Plazza::Main::createProcess()
-{
-  Fork proc;
-
-  if (proc.getPid() == 0)
-    {
-      //TODO:Sucer la bite de Popo
-    }
-}
-
