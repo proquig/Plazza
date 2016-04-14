@@ -9,6 +9,8 @@
 #include "utils/SafeQueue.hpp"
 #include "utils/Fork.hpp"
 
+char toto[] = "[]";
+
 int main(int argc, char *argv[])
 {
   Plazza::Main(argc, argv);

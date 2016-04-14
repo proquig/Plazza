@@ -19,6 +19,7 @@ set(
         src/utils/Fifo.hpp
         src/utils/Fork.cpp
         src/utils/Fork.hpp
+        src/utils/IConnector.hpp
         src/utils/ISafeQueue.hpp
         src/utils/SafeQueue.hpp
         src/IOrder.h
