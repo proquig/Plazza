@@ -15,6 +15,8 @@ set(
         src/orders/IpAddress.h
         src/utils/Exception.cpp
         src/utils/Exception.hpp
+        src/utils/Fifo.cpp
+        src/utils/Fifo.hpp
         src/utils/Fork.cpp
         src/utils/Fork.hpp
         src/utils/ISafeQueue.hpp
