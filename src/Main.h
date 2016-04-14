@@ -21,8 +21,6 @@ namespace Plazza
 
     ~Main();
 
-    void createProcess();
-
    private:
     void usage(char *name);
   };
