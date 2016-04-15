@@ -9,7 +9,7 @@ int  pid =fork();
     {
       try
 	{
-	  Fifo t("testers"); //Construction test
+	  Plazza::Fifo t("testers"); //Construction test
 	}
       catch (std::exception *e)
 	{

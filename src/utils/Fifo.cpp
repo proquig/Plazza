@@ -18,7 +18,6 @@ Plazza::Fifo::Fifo(const std::string &name)
   try
     {
       this->_out.open(this->_path.c_str(), std::ofstream::out);
-      std::cout << "file [" << this->_path << "] Created\n";
       this->_in.open(this->_path.c_str(), std::ifstream::in);
     } catch (std::exception &e)
     {
