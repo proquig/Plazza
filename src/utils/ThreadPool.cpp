@@ -4,27 +4,27 @@
 
 #include "ThreadPool.hpp"
 
-ThreadPool::ThreadPool(const unsigned int &nb)
-	: stop(false)
+Plazza::ThreadPool::ThreadPool(unsigned int theads)
+	: _stop(false)
 {
-  for (size_t i = 0; i < nb; ++i)
+  for (size_t i = 0; i < theads; ++i)
     this->_workers.push_back(std::thread());
 }
 
-ThreadPool::~ThreadPool()
+Plazza::ThreadPool::~ThreadPool()
 {
-  stop = true;
-  _condition.notify_all();
-  for (size_t i = 0; i < _workers.size(); ++i)
-    _workers[i].join();
+  this->_stop = true;
+  this->_condition.notify_all();
+  for (size_t i = 0; i < this->_workers.size(); ++i)
+    this->_workers[i].join();
 }
 
 template<class F>
-void ThreadPool::enqueue(F func)
+void Plazza::ThreadPool::enqueue(F func)
 {
   {
     std::unique_lock<std::mutex> lock(this->_mutex);
-    _tasks.push(std::function<void()>(func));
+    this->_tasks.push(std::function<void()>(func));
   }
-  _condition.notify_one();
+  this->_condition.notify_one();
 }

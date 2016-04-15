@@ -13,21 +13,24 @@
 
 #include "SafeQueue.hpp"
 
-class ThreadPool
+namespace Plazza
 {
-  SafeQueue<std::function<void()> > _tasks;
-  std::vector<std::thread> _workers;
-  std::mutex _mutex;
-  std::condition_variable _condition;
-  bool stop;
+  class ThreadPool
+  {
+    SafeQueue<std::function<void()> > _tasks;
+    std::vector<std::thread> _workers;
+    std::mutex _mutex;
+    std::condition_variable _condition;
+    bool _stop;
 
- public:
-  ThreadPool(const unsigned int &);
+   public:
+    ThreadPool(unsigned int threads);
 
-  ~ThreadPool();
+    ~ThreadPool();
 
-  template<class F>
-  void enqueue(F func);
-};
+    template<class F>
+    void enqueue(F func);
+  };
+}
 
 #endif //CPP_PLAZZA_THREADPOOL_HPP
