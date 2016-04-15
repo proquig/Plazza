@@ -22,12 +22,14 @@ set(
         src/utils/IConnector.hpp
         src/utils/ISafeQueue.hpp
         src/utils/SafeQueue.hpp
+        src/utils/ThreadPool.cpp
+        src/utils/ThreadPool.hpp
         src/IOrder.h
         src/Main.cpp
         src/Main.h
         src/OrderReader.cpp
         src/OrderReader.h
-)
+        src/process/Process.cpp src/process/Process.hpp)
 
 add_executable(cpp_plazza ${SOURCE_FILES})
 target_link_libraries(cpp_plazza ${CMAKE_THREAD_LIBS_INIT})
