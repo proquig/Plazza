@@ -7,6 +7,7 @@
 
 
 #include <string>
+#include <fstream>
 
 #include <fcntl.h>
 #include <sys/stat.h>
@@ -14,19 +15,28 @@
 #include <unistd.h>
 #include "Exception.hpp"
 
-class Fifo
+namespace Plazza
 {
- private:
-	std::string _name;
-	std::string _path;
-  	Fifo(){};
- public:
-  	Fifo(const std::string &);
-  	~Fifo();
-  	void writeIn(const std::string &);
-  	std::string & readIn();
+  class Fifo
+  {
+   private:
+    std::string _name;
+    std::string _path;
+    std::ifstream _in;
+    std::ofstream _out;
 
-};
+    Fifo()
+    { };
+   public:
+    Fifo(const std::string &);
+
+    ~Fifo();
+
+    std::ifstream &writeIn();
+
+    std::ofstream &readIn();
+  };
+}
 
 
 #endif //CPP_PLAZZA_FIFO_HPP

@@ -7,20 +7,23 @@
 
 #include <unistd.h>
 
-class Fork
+namespace Plazza
 {
- private:
-  pid_t _pid;
+  class Fork
+  {
+   private:
+    pid_t _pid;
 
- public:
-  Fork();
+   public:
+    Fork();
 
-  ~Fork();
+    ~Fork();
 
-  pid_t &getPid() const;
+    pid_t &getPid() const;
 
-  bool isChild() const;
-};
+    bool isChild() const;
+  };
+}
 
 
 #endif //CPP_PLAZZA_FORK_HPP

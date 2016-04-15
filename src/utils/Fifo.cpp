@@ -2,48 +2,45 @@
 // Created by cloquet on 14/04/16.
 //
 
-#include <fstream>
 #include "Fifo.hpp"
 
-Fifo::Fifo(const std::string &name)
+Plazza::Fifo::Fifo(const std::string &name)
 	: _name(name),
 	  _path("/tmp/")
 {
-  _path += name;
-  if (mkfifo(_path.c_str(), 0666) == -1)
-    throw(exception("Fifo can't be create."));
-}
+  this->_path += name;
 
-void Fifo::writeIn(const std::string &data)
-{
-  int fd;
+  if (mkfifo(this->_path.c_str(), 0666) == -1)
+    std::cerr << "file [" << this->_path << "] Exist\n";
+  else
+    std::cerr << "file [" << this->_path << "] Created\n";
 
-  if ((fd = open(_path.c_str(), O_WRONLY)) == -1)
-  	throw (exception("Cann't open the file"));
-  write(fd, data.c_str(), sizeof(data.c_str()));
-  close(fd);
-}
-
-std::string 	&Fifo::readIn()
-{
-  std::ifstream fifo(_path.c_str());
-  std::string str;
-  std::string res;
-  bool done = false;
-  
-  while (!done)
+  try
     {
-      while(std::getline(fifo, str))
-	  res += str;
-      if (fifo.eof())
-	fifo.clear();
-      else
-	done = true;
+      this->_out.open(this->_path.c_str(), std::ofstream::out);
+      std::cout << "file [" << this->_path << "] Created\n";
+      this->_in.open(this->_path.c_str(), std::ifstream::in);
+    } catch (std::exception &e)
+    {
+      std::cerr << e.what() << std::endl;
     }
-  return res;
+
 }
 
-Fifo::~Fifo()
+Plazza::Fifo::~Fifo()
 {
-  unlink(_path.c_str());
+  std::cerr << "fifo detruit" << std::endl;
+  _out.close();
+  _in.close();
+  unlink(this->_path.c_str());
+}
+
+std::ifstream 	&Plazza::Fifo::writeIn()
+{
+  return (this->_in);
+}
+
+std::ofstream	&Plazza::Fifo::readIn()
+{
+  return (this->_out);
 }
