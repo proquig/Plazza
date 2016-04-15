@@ -3,13 +3,10 @@
 //
 
 #include <iostream>
-#include <unistd.h>
 #include "Main.h"
 #include "OrderReader.h"
 #include "utils/SafeQueue.hpp"
 #include "utils/Fork.hpp"
-
-char toto[] = "[]";
 
 int main(int argc, char *argv[])
 {
