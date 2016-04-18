@@ -6,7 +6,7 @@
 #define CPP_PLAZZA_PHONENUMBER_H
 
 #include <fstream>
-#include "../IOrder.h"
+#include "IOrder.h"
 
 namespace Plazza
 {
@@ -18,6 +18,8 @@ namespace Plazza
     virtual ~PhoneNumber();
 
     virtual std::string getRegex() const override;
+
+    static IOrder create();
   };
 }
 

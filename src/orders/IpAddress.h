@@ -6,7 +6,7 @@
 #define CPP_PLAZZA_IPADDRESS_H
 
 #include <string>
-#include "../IOrder.h"
+#include "IOrder.h"
 
 namespace Plazza
 {
@@ -19,6 +19,8 @@ namespace Plazza
     virtual ~IpAddress() override;
 
     virtual std::string getRegex() const override;
+
+    static IOrder create();
   };
 }
 

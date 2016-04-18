@@ -8,3 +8,13 @@ Plazza::EmailAddress::~EmailAddress()
 {
 
 }
+
+std::string Plazza::EmailAddress::getRegex() const
+{
+  return this->_regex;
+}
+
+Plazza::IOrder Plazza::EmailAddress::create()
+{
+  return Plazza::EmailAddress();
+}

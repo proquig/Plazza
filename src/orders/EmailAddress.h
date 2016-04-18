@@ -5,7 +5,7 @@
 #ifndef CPP_PLAZZA_EMAILADDRESS_H
 #define CPP_PLAZZA_EMAILADDRESS_H
 
-#include "../IOrder.h"
+#include "IOrder.h"
 
 namespace Plazza
 {
@@ -16,10 +16,9 @@ namespace Plazza
    public:
     virtual ~EmailAddress() override;
 
-    virtual std::string getRegex() const override
-    {
-      return this->_regex;
-    }
+    virtual std::string getRegex() const override;
+
+    static IOrder create();
   };
 }
 
