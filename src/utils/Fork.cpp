@@ -14,11 +14,6 @@ Plazza::Fork::~Fork()
 
 }
 
-pid_t &Plazza::Fork::getPid() const
-{
-  return this->_pid;
-}
-
 bool Plazza::Fork::isChild() const
 {
   return this->_pid == 0;

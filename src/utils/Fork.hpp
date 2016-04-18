@@ -19,8 +19,6 @@ namespace Plazza
 
     ~Fork();
 
-    pid_t &getPid() const;
-
     bool isChild() const;
   };
 }
