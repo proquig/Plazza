@@ -5,8 +5,7 @@
 #ifndef CPP_PLAZZA_MAIN_H
 #define CPP_PLAZZA_MAIN_H
 
-
-#include "IOrder.h"
+#include "orders/IOrder.hpp"
 #include "utils/ISafeQueue.hpp"
 
 namespace Plazza
@@ -25,6 +24,5 @@ namespace Plazza
     void usage(char *name);
   };
 }
-
 
 #endif //CPP_PLAZZA_MAIN_H

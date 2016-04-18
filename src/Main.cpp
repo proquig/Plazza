@@ -5,8 +5,8 @@
 #include <iostream>
 #include "Main.h"
 #include "OrderReader.h"
-#include "utils/SafeQueue.hpp"
 #include "utils/Fork.hpp"
+#include "utils/SafeQueue.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -25,13 +25,10 @@ Plazza::Main::Main(int argc, char **argv) : _ordersQueue(new SafeQueue<IOrder *>
       {
 	this->usage(argv[0]);
       }
-
-  //OrderReader(this->_ordersQueue);
 }
 
 Plazza::Main::~Main()
 {
-
 }
 
 void Plazza::Main::usage(char *name)
