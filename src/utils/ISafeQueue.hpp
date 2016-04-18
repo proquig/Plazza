@@ -1,10 +1,12 @@
-#include <iostream>
+#ifndef CPP_PLAZZA_ISAFEQUEUE_HPP
+#define CPP_PLAZZA_ISAFEQUEUE_HPP
 
 template<typename T>
 class ISafeQueue
 {
  public:
-  virtual ~ISafeQueue(void);
+  virtual ~ISafeQueue(void)
+  { }
 
   virtual int pop(void) = 0;
 
@@ -13,6 +15,4 @@ class ISafeQueue
   virtual bool tryPop(T *value) = 0;
 };
 
-template<typename T>
-ISafeQueue<T>::~ISafeQueue()
-{ }
+#endif
