@@ -3,7 +3,6 @@
 //
 
 #include "Process.hpp"
-#include "../utils/ThreadPool.hpp"
 
 Plazza::Process::Process(unsigned int maxThreads, unsigned int id) : id(id)
 {
@@ -14,8 +13,7 @@ Plazza::Process::Process(unsigned int maxThreads, unsigned int id) : id(id)
     {
       this->_read = this->_fifo[0];
       this->_write = this->_fifo[1];
-      this->_threadPool = new ThreadPool(maxThreads
-      );
+      this->_threadPool = new ThreadPool(maxThreads);
     }
   else
     {
@@ -24,7 +22,7 @@ Plazza::Process::Process(unsigned int maxThreads, unsigned int id) : id(id)
     }
 }
 
-virtual Plazza::Process::~Process()
+Plazza::Process::~Process()
 {
   if (this->_fork->isChild())
     delete this->_threadPool;
