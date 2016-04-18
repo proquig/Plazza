@@ -3,8 +3,8 @@
 //
 
 #include <iostream>
-#include "Main.h"
-#include "OrderReader.h"
+#include "Main.hpp"
+#include "OrderReader.hpp"
 #include "utils/Fork.hpp"
 #include "utils/SafeQueue.hpp"
 

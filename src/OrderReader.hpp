@@ -9,19 +9,17 @@
 #include <thread>
 #include <queue>
 #include "orders/IOrder.hpp"
+#include "utils/Factory.hpp"
 
 namespace Plazza
 {
   class OrderReader
   {
-    std::queue<IOrder *> orders;
-
-    std::vector<std::string> commands;
+    Factory<IOrder> _factory;
+    std::queue<IOrder *> _orders;
 
    public:
     OrderReader();
-
-    const std::vector<std::string> &getCommands() const;
 
    private:
     void parseLine(const std::string &line);

@@ -2,8 +2,8 @@
 // Created by pogam-_g on 4/11/16.
 //
 
-#ifndef CPP_PLAZZA_MAIN_H
-#define CPP_PLAZZA_MAIN_H
+#ifndef CPP_PLAZZA_MAIN_HPP
+#define CPP_PLAZZA_MAIN_HPP
 
 #include "orders/IOrder.hpp"
 #include "utils/ISafeQueue.hpp"
@@ -25,4 +25,4 @@ namespace Plazza
   };
 }
 
-#endif //CPP_PLAZZA_MAIN_H
+#endif //CPP_PLAZZA_MAIN_HPP
