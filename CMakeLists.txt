@@ -7,12 +7,20 @@ find_package(Threads)
 
 set(
         SOURCE_FILES
-        src/orders/PhoneNumber.cpp
-        src/orders/PhoneNumber.h
+
         src/orders/EmailAddress.cpp
-        src/orders/EmailAddress.h
+        src/orders/EmailAddress.hpp
+        src/orders/IOrder.hpp
         src/orders/IpAddress.cpp
-        src/orders/IpAddress.h
+        src/orders/IpAddress.hpp
+        src/orders/PhoneNumber.cpp
+        src/orders/PhoneNumber.hpp
+        src/orders/OrderFactory.cpp
+        src/orders/OrderFactory.hpp
+
+        src/process/Process.cpp
+        src/process/Process.hpp
+
         src/utils/Exception.cpp
         src/utils/Exception.hpp
         src/utils/Fifo.cpp
@@ -21,15 +29,17 @@ set(
         src/utils/Fork.hpp
         src/utils/IConnector.hpp
         src/utils/ISafeQueue.hpp
+        src/utils/Parser.cpp
+        src/utils/Parser.hpp
         src/utils/SafeQueue.hpp
         src/utils/ThreadPool.cpp
         src/utils/ThreadPool.hpp
-        src/IOrder.h
+
         src/Main.cpp
         src/Main.h
         src/OrderReader.cpp
         src/OrderReader.h
-        src/process/Process.cpp src/process/Process.hpp)
+)
 
 add_executable(cpp_plazza ${SOURCE_FILES})
 target_link_libraries(cpp_plazza ${CMAKE_THREAD_LIBS_INIT})
