@@ -8,6 +8,7 @@
 #include <queue>
 #include <condition_variable>
 #include "Exception.hpp"
+#include "ISafeQueue.hpp"
 
 template<typename T>
 class SafeQueue : public ISafeQueue<T>
