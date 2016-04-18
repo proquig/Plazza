@@ -2,7 +2,7 @@
 // Created by pogam-_g on 4/11/16.
 //
 
-#include "IpAddress.h"
+#include "IpAddress.hpp"
 
 Plazza::IpAddress::~IpAddress()
 {

@@ -5,7 +5,7 @@
 #ifndef CPP_PLAZZA_EMAILADDRESS_H
 #define CPP_PLAZZA_EMAILADDRESS_H
 
-#include "IOrder.h"
+#include "IOrder.hpp"
 
 namespace Plazza
 {

@@ -3,9 +3,9 @@
 //
 
 #include "OrderFactory.hpp"
-#include "IpAddress.h"
-#include "EmailAddress.h"
-#include "PhoneNumber.h"
+#include "IpAddress.hpp"
+#include "EmailAddress.hpp"
+#include "PhoneNumber.hpp"
 
 Plazza::OrderFactory::OrderFactory()
 {
@@ -14,7 +14,7 @@ Plazza::OrderFactory::OrderFactory()
   this->orderClass.insert(std::pair<ORDER_TYPE>("PHONE_NUMBER", &PhoneNumber::create));
 }
 
-IOrder *Plazza::OrderFactory::createOrder(const std::string &type)
+Plazza::IOrder *Plazza::OrderFactory::createOrder(const std::string &type)
 {
-  return (this->orderClass.at(type))();
+  return nullptr; //(this->orderClass.at(type))();
 }
