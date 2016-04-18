@@ -31,7 +31,10 @@ void				Plazza::OrderReader::parseCommand(const std::string &command)
   files.pop_back();
 
   for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); it++)
-    this->_orders.push(this->_factory.create(orderType));
+    {
+      this->_orders.push(this->_factory.create(orderType));
+      this->_orders.back()->setFile(*it);
+    }
 }
 
 void Plazza::OrderReader::parseLine(const std::string &line)
