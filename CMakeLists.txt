@@ -15,8 +15,6 @@ set(
         src/orders/IpAddress.hpp
         src/orders/PhoneNumber.cpp
         src/orders/PhoneNumber.hpp
-        src/orders/OrderFactory.cpp
-        src/orders/OrderFactory.hpp
 
         src/process/Process.cpp
         src/process/Process.hpp
@@ -39,7 +37,9 @@ set(
         src/Main.h
         src/OrderReader.cpp
         src/OrderReader.h
-)
+        src/utils/Factory/Factory.hpp
+        src/utils/Factory/Factory.cpp
+        src/utils/Factory/IFactoriable.hpp)
 
 add_executable(cpp_plazza ${SOURCE_FILES})
 target_link_libraries(cpp_plazza ${CMAKE_THREAD_LIBS_INIT})

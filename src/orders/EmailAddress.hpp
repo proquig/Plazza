@@ -17,10 +17,7 @@ namespace Plazza
     virtual ~EmailAddress() override;
 
     virtual std::string getRegex() const override;
-
-    static IOrder create();
   };
 }
-
 
 #endif //CPP_PLAZZA_EMAILADDRESS_H

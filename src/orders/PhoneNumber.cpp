@@ -7,17 +7,9 @@
 
 Plazza::PhoneNumber::~PhoneNumber()
 {
-
 }
 
 std::string Plazza::PhoneNumber::getRegex() const
 {
   return this->_regex;
 }
-
-Plazza::IOrder Plazza::PhoneNumber::create()
-{
-  return Plazza::PhoneNumber();
-}
-
-

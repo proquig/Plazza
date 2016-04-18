@@ -18,10 +18,7 @@ namespace Plazza
     virtual ~PhoneNumber();
 
     virtual std::string getRegex() const override;
-
-    static IOrder create();
   };
 }
-
 
 #endif //CPP_PLAZZA_PHONENUMBER_H
