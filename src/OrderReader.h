@@ -8,7 +8,7 @@
 
 #include <thread>
 #include <queue>
-#include "IOrder.h"
+#include "orders/IOrder.h"
 
 namespace Plazza
 {
@@ -16,8 +16,12 @@ namespace Plazza
   {
     std::queue<IOrder *> orders;
 
+    std::vector<std::string> commands;
+
    public:
-    OrderReader(std::queue<IOrder *> orders);
+    OrderReader();
+
+    const std::vector<std::string> &getCommands() const;
 
    private:
     void parseLine(const std::string &line);
