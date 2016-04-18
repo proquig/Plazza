@@ -21,6 +21,8 @@ namespace Plazza
    public:
     OrderReader();
 
+    const std::queue<IOrder *> &get_orders() const;
+
    private:
     void parseLine(const std::string &line);
 

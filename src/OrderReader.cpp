@@ -43,3 +43,8 @@ void Plazza::OrderReader::parseLine(const std::string &line)
     if (command.length())
       parseCommand(command);
 }
+
+const std::queue<IOrder *> &Plazza::OrderReader::get_orders() const
+{
+  return this->_orders;
+}
