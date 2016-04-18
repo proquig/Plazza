@@ -8,7 +8,8 @@ find_package(Threads)
 set(
         SOURCE_FILES
 
-        src/orders/EmailAddress.cpp
+        src/orders/AOrder.cpp
+        src/orders/AOrder.hpp        src/orders/EmailAddress.cpp
         src/orders/EmailAddress.hpp
         src/orders/IOrder.hpp
         src/orders/IpAddress.cpp
@@ -18,6 +19,8 @@ set(
 
         src/process/Process.cpp
         src/process/Process.hpp
+
+        src/utils/Factory.hpp
 
         src/utils/Exception.cpp
         src/utils/Exception.hpp
@@ -34,12 +37,10 @@ set(
         src/utils/ThreadPool.hpp
 
         src/Main.cpp
-        src/Main.h
+        src/Main.hpp
         src/OrderReader.cpp
-        src/OrderReader.h
-        src/utils/Factory/Factory.hpp
-        src/utils/Factory/Factory.cpp
-        src/utils/Factory/IFactoriable.hpp)
+        src/OrderReader.hpp
+)
 
 add_executable(cpp_plazza ${SOURCE_FILES})
 target_link_libraries(cpp_plazza ${CMAKE_THREAD_LIBS_INIT})
