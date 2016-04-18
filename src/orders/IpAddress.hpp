@@ -6,11 +6,11 @@
 #define CPP_PLAZZA_IPADDRESS_H
 
 #include <string>
-#include "IOrder.hpp"
+#include "AOrder.hpp"
 
 namespace Plazza
 {
-  class IpAddress : public IOrder
+  class IpAddress : public AOrder
   {
     const std::string _regex = "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)." \
           "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
@@ -18,7 +18,9 @@ namespace Plazza
    public:
     virtual ~IpAddress() override;
 
-    virtual std::string getRegex() const override;
+    virtual const std::string &getRegex() const override;
+
+    virtual IOrder *clone() const override;
   };
 }
 

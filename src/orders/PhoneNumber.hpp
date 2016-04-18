@@ -6,18 +6,20 @@
 #define CPP_PLAZZA_PHONENUMBER_H
 
 #include <fstream>
-#include "IOrder.hpp"
+#include "AOrder.hpp"
 
 namespace Plazza
 {
-  class PhoneNumber : public IOrder
+  class PhoneNumber : public AOrder
   {
     const std::string _regex = "(0|\\+33|0033)[1-9][0-9]{8}";
 
    public:
     virtual ~PhoneNumber();
 
-    virtual std::string getRegex() const override;
+    virtual const std::string &getRegex() const override;
+
+    virtual IOrder *clone() const override;
   };
 }
 

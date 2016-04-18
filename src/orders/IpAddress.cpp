@@ -8,7 +8,12 @@ Plazza::IpAddress::~IpAddress()
 {
 }
 
-std::string Plazza::IpAddress::getRegex() const
+const std::string &Plazza::IpAddress::getRegex() const
 {
   return this->_regex;
+}
+
+Plazza::IOrder *Plazza::IpAddress::clone() const
+{
+  return new IpAddress(*this);
 }

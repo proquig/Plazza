@@ -5,18 +5,20 @@
 #ifndef CPP_PLAZZA_EMAILADDRESS_H
 #define CPP_PLAZZA_EMAILADDRESS_H
 
-#include "IOrder.hpp"
+#include "AOrder.hpp"
 
 namespace Plazza
 {
-  class EmailAddress : public IOrder
+  class EmailAddress : public AOrder
   {
     const std::string _regex = "";
 
    public:
     virtual ~EmailAddress() override;
 
-    virtual std::string getRegex() const override;
+    virtual const std::string &getRegex() const override;
+
+    virtual IOrder *clone() const override;
   };
 }
 

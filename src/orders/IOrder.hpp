@@ -15,9 +15,14 @@ namespace Plazza
     virtual ~IOrder()
     { }
 
-    virtual std::string getRegex() const = 0;
+    virtual const std::string & getRegex() const = 0;
+
+    virtual const std::string &getFile() const = 0;
+
+    virtual void setFile(const std::string &file) = 0;
+
+    virtual IOrder *clone() const = 0;
   };
 }
-
 
 #endif //CPP_PLAZZA_IORDER_H
