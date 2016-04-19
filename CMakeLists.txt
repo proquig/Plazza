@@ -9,7 +9,8 @@ set(
         SOURCE_FILES
 
         src/orders/AOrder.cpp
-        src/orders/AOrder.hpp        src/orders/EmailAddress.cpp
+        src/orders/AOrder.hpp
+        src/orders/EmailAddress.cpp
         src/orders/EmailAddress.hpp
         src/orders/IOrder.hpp
         src/orders/IpAddress.cpp
