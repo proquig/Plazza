@@ -26,6 +26,7 @@ Plazza::Main::Main(int argc, char **argv) : _ordersQueue(new SafeQueue<IOrder *>
 	this->usage(argv[0]);
       }
   this->_orderReader = new OrderReader(this->_ordersQueue);
+<<<<<<< HEAD
 	Fork proces;
   	if (proces.isChild())
 	  {
@@ -34,6 +35,9 @@ Plazza::Main::Main(int argc, char **argv) : _ordersQueue(new SafeQueue<IOrder *>
 	    //Maintenant on va rire x)
 	  }
 
+=======
+  this->_orderReader->stop();
+>>>>>>> a338b49911ec8300219c3796e7bd1613e58d2c81
 }
 
 Plazza::Main::~Main()
