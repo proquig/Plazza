@@ -5,7 +5,7 @@
 // Login   <proqui_g@epitech.net>
 // 
 // Started on  Mon Apr 18 18:52:23 2016 Guillaume PROQUIN
-// Last update Mon Apr 18 21:08:08 2016 Guillaume PROQUIN
+// Last update Tue Apr 19 13:24:39 2016 Guillaume PROQUIN
 //
 
 #ifndef		__DECRYPT_HPP__
@@ -24,7 +24,8 @@ private:
 public:
   Decrypt(const std::string& regex, const std::string& filename);
   ~Decrypt();
-  std::vector<std::string>	decryptCaesar(std::string& line);
+  std::vector<std::string>	decryptXor(const std::string& line);
+  std::vector<std::string>	decryptCaesar(const std::string& line);
   std::vector<std::string>	decrypt();
 };
 
