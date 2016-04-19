@@ -5,18 +5,18 @@
 // Login   <proqui_g@epitech.net>
 // 
 // Started on  Mon Apr 18 18:52:13 2016 Guillaume PROQUIN
-// Last update Tue Apr 19 10:38:28 2016 Guillaume PROQUIN
+// Last update Tue Apr 19 10:49:09 2016 Guillaume PROQUIN
 //
 
 #include "Decrypt.hpp"
 
 Decrypt::Decrypt(const std::string& regex, const std::string& filename) : Parser(regex, filename)
 {
-};
+}
 
 Decrypt::~Decrypt()
 {
-};
+}
 
 std::vector<std::string>	Decrypt::decryptCaesar(std::string& line)
 {
@@ -38,11 +38,11 @@ std::vector<std::string>	Decrypt::decryptCaesar(std::string& line)
       ret.insert(ret.begin(), tmp.begin(), tmp.end());
     }
   return ret;
-};
+}
 
 //std::vector<std::string>	Decrypt::decryptXor(const std::string& line, int key)
 //{
-//};
+//}
 
 std::vector<std::string>	Decrypt::decrypt()
 {
@@ -58,4 +58,4 @@ std::vector<std::string>	Decrypt::decrypt()
       ret.insert(ret.end(), tmp.begin(), tmp.end());
     }
   return ret;
-};
+}
