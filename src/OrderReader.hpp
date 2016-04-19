@@ -17,11 +17,15 @@ namespace Plazza
   {
     Factory<IOrder> _factory;
     ISafeQueue<IOrder *> *_orders;
+    std::thread *_thread;
 
    public:
     OrderReader(ISafeQueue<IOrder *> *_ordersQueue);
+    ~OrderReader();
 
    private:
+    void reader();
+
     void parseLine(const std::string &line);
 
     void parseCommand(const std::string &command);
