@@ -25,7 +25,7 @@ endif
 
 LDFLAGS	+= -lpthread
 
-NAME	= cpp_plazza
+NAME	= plazza
 
 OBJDIR = obj
 
