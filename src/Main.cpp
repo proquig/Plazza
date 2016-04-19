@@ -6,6 +6,7 @@
 #include "Main.hpp"
 #include "utils/Fork.hpp"
 #include "utils/SafeQueue.hpp"
+#include "utils/ThreadPool.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -25,6 +26,14 @@ Plazza::Main::Main(int argc, char **argv) : _ordersQueue(new SafeQueue<IOrder *>
 	this->usage(argv[0]);
       }
   this->_orderReader = new OrderReader(this->_ordersQueue);
+	Fork proces;
+  	if (proces.isChild())
+	  {
+	    std::cout << "je suis dans le fils" << std::endl;
+	    ThreadPool pool(this->_maxThreads);
+	    //Maintenant on va rire x)
+	  }
+
 }
 
 Plazza::Main::~Main()
