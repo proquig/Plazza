@@ -32,6 +32,7 @@ void				Plazza::OrderReader::reader()
     {
       std::getline(std::cin, line);
       parseLine(line);
+      std::cout << this->_orders->size() << std::endl;
     }
 }
 
@@ -53,8 +54,8 @@ void				Plazza::OrderReader::parseCommand(const std::string &command)
       IOrder *pOrder = this->_factory.create(orderType);
       if (pOrder != nullptr)
 	{
+	  pOrder->setFile(*it);
 	  this->_orders->push(pOrder);
-	  this->_orders->back()->setFile(*it);
 	}
     }
 }

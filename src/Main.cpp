@@ -29,8 +29,8 @@ Plazza::Main::Main(int argc, char **argv) : _ordersQueue(new SafeQueue<IOrder *>
 
 Plazza::Main::~Main()
 {
-  delete this->_ordersQueue;
   delete this->_orderReader;
+  delete this->_ordersQueue;
 }
 
 void Plazza::Main::usage(char *name)
