@@ -25,6 +25,7 @@ Plazza::Main::Main(int argc, char **argv) : _ordersQueue(new SafeQueue<IOrder *>
 	this->usage(argv[0]);
       }
   this->_orderReader = new OrderReader(this->_ordersQueue);
+  this->_orderReader->stop();
 }
 
 Plazza::Main::~Main()

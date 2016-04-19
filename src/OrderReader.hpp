@@ -18,10 +18,14 @@ namespace Plazza
     Factory<IOrder> _factory;
     ISafeQueue<IOrder *> *_orders;
     std::thread *_thread;
+    bool _stop;
 
    public:
     OrderReader(ISafeQueue<IOrder *> *_ordersQueue);
+
     ~OrderReader();
+
+    void stop();
 
    private:
     void reader();
