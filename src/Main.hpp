@@ -7,12 +7,14 @@
 
 #include "orders/IOrder.hpp"
 #include "utils/ISafeQueue.hpp"
+#include "OrderReader.hpp"
 
 namespace Plazza
 {
   class Main
   {
     ISafeQueue<IOrder *> *_ordersQueue;
+    OrderReader *_orderReader;
     unsigned long _maxThreads;
 
    public:
