@@ -8,15 +8,22 @@
 #include <sstream>
 #include "OrderReader.hpp"
 #include "orders/EmailAddress.hpp"
-#include "orders/IOrder.hpp"
 #include "orders/IpAddress.hpp"
 #include "orders/PhoneNumber.hpp"
 
-Plazza::OrderReader::OrderReader()
+Plazza::OrderReader::OrderReader(ISafeQueue<IOrder *> *ordersQueue) : _orders(ordersQueue)
 {
+  std::string			line;
+
   this->_factory.registerType("EMAIL_ADDRESS", new EmailAddress);
   this->_factory.registerType("IP_ADDRESS", new IpAddress);
   this->_factory.registerType("PHONE_NUMBER", new PhoneNumber);
+
+  while (std::cin)
+    {
+      std::getline(std::cin, line);
+      parseLine(line);
+    }
 }
 
 void				Plazza::OrderReader::parseCommand(const std::string &command)
@@ -34,22 +41,21 @@ void				Plazza::OrderReader::parseCommand(const std::string &command)
 
   for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); it++)
     {
-      this->_orders.push(this->_factory.create(orderType));
-      this->_orders.back()->setFile(*it);
+      IOrder *pOrder = this->_factory.create(orderType);
+      if (pOrder != nullptr)
+	{
+	  this->_orders->push(pOrder);
+	  this->_orders->back()->setFile(*it);
+	}
     }
 }
 
-void Plazza::OrderReader::parseLine(const std::string &line)
+void				Plazza::OrderReader::parseLine(const std::string &line)
 {
-  std::stringstream               lineStream(line);
-  std::string                     command;
+  std::stringstream		lineStream(line);
+  std::string			command;
 
   while (std::getline(lineStream, command, ';'))
     if (command.length())
       parseCommand(command);
-}
-
-const std::queue<Plazza::IOrder *> &Plazza::OrderReader::get_orders() const
-{
-  return this->_orders;
 }

@@ -9,6 +9,11 @@ Plazza::PhoneNumber::~PhoneNumber()
 {
 }
 
+const std::string &Plazza::PhoneNumber::getOrder() const
+{
+  return this->_order;
+}
+
 const std::string &Plazza::PhoneNumber::getRegex() const
 {
   return this->_regex;

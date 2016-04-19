@@ -10,48 +10,45 @@
 #include "Exception.hpp"
 #include "ISafeQueue.hpp"
 
-template<typename T>
-class SafeQueue : public ISafeQueue<T>
+namespace Plazza
 {
- private:
-  std::queue<T> _queue;
-  std::condition_variable _conVar;
-  std::mutex _mutex;
+  template<typename T>
+  class SafeQueue : public ISafeQueue<T>
+  {
+   private:
+    std::queue<T> _queue;
+    std::condition_variable _conVar;
+    std::mutex _mutex;
 
- public:
-  SafeQueue();
+   public:
+    SafeQueue();
 
-  ~SafeQueue(void);
+    virtual ~SafeQueue(void);
 
-  int pop(void);
+    virtual void push(const T value);
 
-  void push(const T value);
+    virtual bool tryPop(T *value);
 
-  bool tryPop(T *value);
-};
+    virtual int pop(void);
 
-template<typename T>
-int SafeQueue<T>::pop(void)
-{
-  if (this->_queue.empty())
-    { }//this->_conVar.wait();
-  this->_queue.pop();
-  return (0);
+    virtual T &front();
+
+    virtual T &back();
+  };
 }
 
 template<typename T>
-SafeQueue<T>::SafeQueue()
-{
-  std::cout << "Création SafeQueue" << std::endl;
-}
-
-template<typename T>
-SafeQueue<T>::~SafeQueue(void)
+Plazza::SafeQueue<T>::SafeQueue()
 {
 }
 
 template<typename T>
-void SafeQueue<T>::push(const T value)
+Plazza::SafeQueue<T>::~SafeQueue(void)
+{
+}
+
+template<typename T>
+void Plazza::SafeQueue<T>::push(const T value)
 {
   std::lock_guard<std::mutex> lock_guard(_mutex);
   this->_conVar.notify_one();
@@ -59,7 +56,7 @@ void SafeQueue<T>::push(const T value)
 }
 
 template<typename T>
-bool SafeQueue<T>::tryPop(T *value)
+bool Plazza::SafeQueue<T>::tryPop(T *value)
 {
   if (this->_queue.empty())
     return false;
@@ -70,6 +67,27 @@ bool SafeQueue<T>::tryPop(T *value)
       this->_queue.pop();
       return true;
     }
+}
+
+template<typename T>
+int Plazza::SafeQueue<T>::pop(void)
+{
+  if (this->_queue.empty())
+    { }//this->_conVar.wait();
+  this->_queue.pop();
+  return (0);
+}
+
+template<typename T>
+T &Plazza::SafeQueue<T>::front()
+{
+  return this->_queue.front();
+}
+
+template<typename T>
+T &Plazza::SafeQueue<T>::back()
+{
+  return this->_queue.back();
 }
 
 #endif //CPP_PLAZZA_SAFEQUEUE_HPP

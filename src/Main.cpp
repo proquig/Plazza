@@ -36,4 +36,5 @@ void Plazza::Main::usage(char *name)
   std::cerr << "Usage: " << name << " <threads>" << "\n"
   << "\t threads: a positive integer which determine the maximum number of threads per processus"
   << std::endl;
+  exit(1);
 }

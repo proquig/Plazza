@@ -9,7 +9,8 @@ set(
         SOURCE_FILES
 
         src/orders/AOrder.cpp
-        src/orders/AOrder.hpp        src/orders/EmailAddress.cpp
+        src/orders/AOrder.hpp
+        src/orders/EmailAddress.cpp
         src/orders/EmailAddress.hpp
         src/orders/IOrder.hpp
         src/orders/IpAddress.cpp
@@ -20,10 +21,11 @@ set(
         src/process/Process.cpp
         src/process/Process.hpp
 
-        src/utils/Factory.hpp
-
+        src/utils/Decrypt.cpp
+        src/utils/Decrypt.hpp
         src/utils/Exception.cpp
         src/utils/Exception.hpp
+        src/utils/Factory.hpp
         src/utils/Fifo.cpp
         src/utils/Fifo.hpp
         src/utils/Fork.cpp

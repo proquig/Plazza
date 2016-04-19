@@ -5,6 +5,7 @@
 #ifndef CPP_PLAZZA_AORDER_HPP
 #define CPP_PLAZZA_AORDER_HPP
 
+#include <ostream>
 #include "IOrder.hpp"
 
 namespace Plazza
@@ -19,5 +20,7 @@ namespace Plazza
     virtual void setFile(const std::string &file);
   };
 }
+
+std::ostream &operator<<(std::ofstream &o, const Plazza::AOrder &order);
 
 #endif //CPP_PLAZZA_AORDER_HPP

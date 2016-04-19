@@ -12,11 +12,14 @@ namespace Plazza
 {
   class IpAddress : public AOrder
   {
+    const std::string _order = "IP_ADDRESS";
     const std::string _regex = "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)." \
           "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?).(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
 
    public:
     virtual ~IpAddress() override;
+
+    virtual const std::string &getOrder() const override;
 
     virtual const std::string &getRegex() const override;
 

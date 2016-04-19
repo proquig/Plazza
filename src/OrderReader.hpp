@@ -9,18 +9,17 @@
 #include <queue>
 #include "orders/IOrder.hpp"
 #include "utils/Factory.hpp"
+#include "utils/ISafeQueue.hpp"
 
 namespace Plazza
 {
   class OrderReader
   {
     Factory<IOrder> _factory;
-    std::queue<IOrder *> _orders;
+    ISafeQueue<IOrder *> *_orders;
 
    public:
-    OrderReader();
-
-    const std::queue<Plazza::IOrder *> &get_orders() const;
+    OrderReader(ISafeQueue<IOrder *> *_ordersQueue);
 
    private:
     void parseLine(const std::string &line);
