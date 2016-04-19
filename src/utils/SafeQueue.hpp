@@ -17,8 +17,8 @@ namespace Plazza
   {
    private:
     std::queue<T> _queue;
-    std::condition_variable _conVar;
     std::mutex _mutex;
+    std::condition_variable _condVar;
 
    public:
     SafeQueue();
@@ -31,9 +31,11 @@ namespace Plazza
 
     virtual int pop(void);
 
-    virtual T &front();
+    virtual const T &front() const;
 
-    virtual T &back();
+    virtual const T &back() const;
+
+    virtual size_t size() const;
   };
 }
 
@@ -51,7 +53,7 @@ template<typename T>
 void Plazza::SafeQueue<T>::push(const T value)
 {
   std::lock_guard<std::mutex> lock_guard(_mutex);
-  this->_conVar.notify_one();
+  this->_condVar.notify_one();
   this->_queue.push(value);
 }
 
@@ -72,22 +74,29 @@ bool Plazza::SafeQueue<T>::tryPop(T *value)
 template<typename T>
 int Plazza::SafeQueue<T>::pop(void)
 {
+  std::unique_lock<std::mutex> lock(_mutex);
   if (this->_queue.empty())
-    { }//this->_conVar.wait();
+    this->_condVar.wait(lock);
   this->_queue.pop();
   return (0);
 }
 
 template<typename T>
-T &Plazza::SafeQueue<T>::front()
+const T &Plazza::SafeQueue<T>::front() const
 {
   return this->_queue.front();
 }
 
 template<typename T>
-T &Plazza::SafeQueue<T>::back()
+const T &Plazza::SafeQueue<T>::back() const
 {
   return this->_queue.back();
+}
+
+template<typename T>
+size_t Plazza::SafeQueue<T>::size() const
+{
+  return this->_queue.size();
 }
 
 #endif //CPP_PLAZZA_SAFEQUEUE_HPP
