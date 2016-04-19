@@ -5,7 +5,6 @@
 #ifndef CPP_PLAZZA_ORDERREADER_H
 #define CPP_PLAZZA_ORDERREADER_H
 
-
 #include <thread>
 #include <queue>
 #include "orders/IOrder.hpp"
@@ -21,7 +20,7 @@ namespace Plazza
    public:
     OrderReader();
 
-    const std::queue<IOrder *> &get_orders() const;
+    const std::queue<Plazza::IOrder *> &get_orders() const;
 
    private:
     void parseLine(const std::string &line);
@@ -29,6 +28,5 @@ namespace Plazza
     void parseCommand(const std::string &command);
   };
 }
-
 
 #endif //CPP_PLAZZA_ORDERREADER_H

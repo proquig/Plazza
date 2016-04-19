@@ -8,12 +8,14 @@
 #include <sstream>
 #include "OrderReader.hpp"
 #include "orders/EmailAddress.hpp"
+#include "orders/IOrder.hpp"
+#include "orders/IpAddress.hpp"
 #include "orders/PhoneNumber.hpp"
 
 Plazza::OrderReader::OrderReader()
 {
   this->_factory.registerType("EMAIL_ADDRESS", new EmailAddress);
-  this->_factory.registerType("IP_ADDRESS", new EmailAddress);
+  this->_factory.registerType("IP_ADDRESS", new IpAddress);
   this->_factory.registerType("PHONE_NUMBER", new PhoneNumber);
 }
 
@@ -47,7 +49,7 @@ void Plazza::OrderReader::parseLine(const std::string &line)
       parseCommand(command);
 }
 
-const std::queue<IOrder *> &Plazza::OrderReader::get_orders() const
+const std::queue<Plazza::IOrder *> &Plazza::OrderReader::get_orders() const
 {
   return this->_orders;
 }
