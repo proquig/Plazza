@@ -41,8 +41,12 @@ void				Plazza::OrderReader::parseCommand(const std::string &command)
 
   for (std::vector<std::string>::iterator it = files.begin(); it != files.end(); it++)
     {
-      this->_orders.push(this->_factory.create(orderType));
-      this->_orders.back()->setFile(*it);
+      IOrder *pOrder = this->_factory.create(orderType);
+      if (pOrder != nullptr)
+	{
+	  this->_orders.push(pOrder);
+	  this->_orders.back()->setFile(*it);
+	}
     }
 }
 
