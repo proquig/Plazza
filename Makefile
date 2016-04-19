@@ -10,7 +10,7 @@
 
 DEBUG	= yes
 
-DETAILS	= yes
+DETAILS	= no
 
 CC	= g++
 
