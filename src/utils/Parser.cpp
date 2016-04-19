@@ -5,7 +5,7 @@
 // Login   <proqui_g@epitech.net>
 // 
 // Started on  Fri Apr 15 13:16:22 2016 Guillaume PROQUIN
-// Last update Tue Apr 19 10:39:10 2016 Guillaume PROQUIN
+// Last update Tue Apr 19 10:50:41 2016 Guillaume PROQUIN
 //
 
 #include "Parser.hpp"
@@ -53,7 +53,7 @@ std::vector<std::string>	Parser::parseLine(std::string& line)
   if (no_match != REG_NOMATCH)
     throw (exception("Regex match failed"));
   return ret;
-};
+}
 
 std::vector<std::string>	Parser::parse()
 {
