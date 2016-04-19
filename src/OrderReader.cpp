@@ -11,7 +11,7 @@
 #include "orders/IpAddress.hpp"
 #include "orders/PhoneNumber.hpp"
 
-Plazza::OrderReader::OrderReader()
+Plazza::OrderReader::OrderReader(ISafeQueue<IOrder *> *ordersQueue) : _orders(ordersQueue)
 {
   std::string			line;
 
@@ -44,8 +44,8 @@ void				Plazza::OrderReader::parseCommand(const std::string &command)
       IOrder *pOrder = this->_factory.create(orderType);
       if (pOrder != nullptr)
 	{
-	  this->_orders.push(pOrder);
-	  this->_orders.back()->setFile(*it);
+	  this->_orders->push(pOrder);
+	  this->_orders->back()->setFile(*it);
 	}
     }
 }
@@ -58,9 +58,4 @@ void				Plazza::OrderReader::parseLine(const std::string &line)
   while (std::getline(lineStream, command, ';'))
     if (command.length())
       parseCommand(command);
-}
-
-const std::queue<Plazza::IOrder *> &Plazza::OrderReader::get_orders() const
-{
-  return this->_orders;
 }
