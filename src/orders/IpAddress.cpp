@@ -8,6 +8,11 @@ Plazza::IpAddress::~IpAddress()
 {
 }
 
+const std::string &Plazza::IpAddress::getOrder() const
+{
+  return this->_order;
+}
+
 const std::string &Plazza::IpAddress::getRegex() const
 {
   return this->_regex;

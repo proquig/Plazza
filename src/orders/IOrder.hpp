@@ -15,7 +15,9 @@ namespace Plazza
     virtual ~IOrder()
     { }
 
-    virtual const std::string & getRegex() const = 0;
+    virtual const std::string &getOrder() const = 0;
+
+    virtual const std::string &getRegex() const = 0;
 
     virtual const std::string &getFile() const = 0;
 

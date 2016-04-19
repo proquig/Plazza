@@ -8,6 +8,11 @@ Plazza::EmailAddress::~EmailAddress()
 {
 }
 
+const std::string &Plazza::EmailAddress::getOrder() const
+{
+  return this->_order;
+}
+
 const std::string & Plazza::EmailAddress::getRegex() const
 {
   return this->_regex;
