@@ -4,7 +4,7 @@
 
 #include "Process.hpp"
 
-Plazza::Process::Process(unsigned int maxThreads, unsigned int id) : id(id)
+Plazza::Process::Process(unsigned long maxThreads, unsigned int id) : id(id)
 {
   this->_fifo[0] = new Fifo("/tmp/plazza-" + std::to_string(id) + "-Main-Process");
   this->_fifo[1] = new Fifo("/tmp/plazza-" + std::to_string(id) + "-Process-Main");

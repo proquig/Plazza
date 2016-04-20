@@ -4,7 +4,7 @@
 
 #include "ThreadPool.hpp"
 
-Plazza::ThreadPool::ThreadPool(unsigned int theads)
+Plazza::ThreadPool::ThreadPool(unsigned long theads)
 	: _stop(false)
 {
   for (size_t i = 0; i < theads; ++i)
@@ -16,7 +16,10 @@ Plazza::ThreadPool::~ThreadPool()
   this->_stop = true;
   this->_condition.notify_all();
   for (size_t i = 0; i < this->_workers.size(); ++i)
-    this->_workers[i].join();
+    {
+      if (this->_workers[i].joinable())
+	this->_workers[i].join();
+    }
 }
 
 template<class F>

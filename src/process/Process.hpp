@@ -22,7 +22,7 @@ namespace Plazza
     ThreadPool *_threadPool;
 
    public:
-    Process(unsigned int maxThreads, unsigned int id);
+    Process(unsigned long maxThreads, unsigned int id);
 
     virtual ~Process();
   };
