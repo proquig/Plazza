@@ -27,7 +27,7 @@ class Client
   Client();
   ~Client();
   void Send(const std::string &);
-  void Receive(const std::string &);
+  void Receive();
 };
 
 
