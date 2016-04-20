@@ -12,6 +12,7 @@ class Factory
 {
   static std::map<Key, Object *> _map;
  public:
+  ~Factory();
 
   static void registerType(Key key, Object *obj);
 
@@ -19,6 +20,10 @@ class Factory
 };
 
 template<class Object, class Key> std::map<Key, Object *> Factory<Object, Key>::_map = std::map<Key, Object *>();
+
+Factory::~Factory()
+{
+}
 
 template<class Object, class Key>
 void Factory<Object, Key>::registerType(Key key, Object *obj)
@@ -40,5 +45,6 @@ Object *Factory<Object, Key>::create(const Key &key)
 
   return tmp;
 }
+
 
 #endif //CPP_PLAZZA_FACTORY_HPP

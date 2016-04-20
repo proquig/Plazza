@@ -25,8 +25,6 @@ namespace Plazza
     std::ifstream _in;
     std::ofstream _out;
 
-    Fifo()
-    { };
    public:
     Fifo(const std::string &);
 
