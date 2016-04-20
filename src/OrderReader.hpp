@@ -6,10 +6,9 @@
 #define CPP_PLAZZA_ORDERREADER_H
 
 #include <thread>
-#include <queue>
+#include <ISafeQueue.hpp>
 #include "orders/IOrder.hpp"
 #include "utils/Factory.hpp"
-#include "utils/ISafeQueue.hpp"
 
 namespace Plazza
 {

@@ -6,9 +6,9 @@
 
 Plazza::Process::Process(unsigned long maxThreads, unsigned int id) : id(id)
 {
-  this->_fifo[0] = new Fifo("/tmp/plazza-" + std::to_string(id) + "-Main-Process");
-  this->_fifo[1] = new Fifo("/tmp/plazza-" + std::to_string(id) + "-Process-Main");
-  this->_fork = new Fork;
+  this->_fifo[0] = new Fifo("plazza-" + std::to_string(id) + "-Main-Process");
+  this->_fifo[1] = new Fifo("plazza-" + std::to_string(id) + "-Process-Main");
+  /*this->_fork = new Fork;
   if (this->_fork->isChild())
     {
       this->_read = this->_fifo[0];
@@ -19,7 +19,7 @@ Plazza::Process::Process(unsigned long maxThreads, unsigned int id) : id(id)
     {
       this->_read = this->_fifo[1];
       this->_write = this->_fifo[0];
-    }
+    }*/
 }
 
 Plazza::Process::~Process()

@@ -7,8 +7,8 @@
 
 #include <queue>
 #include <condition_variable>
+#include <ISafeQueue.hpp>
 #include "Exception.hpp"
-#include "ISafeQueue.hpp"
 
 namespace Plazza
 {
