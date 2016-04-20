@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <vector>
 #include "OrderReader.hpp"
 #include "orders/EmailAddress.hpp"
 #include "orders/IpAddress.hpp"
