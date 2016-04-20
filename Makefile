@@ -18,12 +18,13 @@ RM	= rm -f
 
 CFLAGS	+= -Wextra -Wall
 CFLAGS	+= -std=c++11
+CFLAGS	+= -pthread
 
 ifeq ($(DEBUG),yes)
 	CFLAGS	+= -g
 endif
 
-LDFLAGS	+= -lpthread
+LDFLAGS	+= -pthread
 
 NAME	= plazza
 
