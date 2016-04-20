@@ -21,7 +21,8 @@ class Factory
 
 template<class Object, class Key> std::map<Key, Object *> Factory<Object, Key>::_map = std::map<Key, Object *>();
 
-Factory::~Factory()
+template<class Object, class Key>
+Factory<Object, Key>::~Factory()
 {
 }
 
