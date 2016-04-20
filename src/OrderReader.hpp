@@ -7,17 +7,21 @@
 
 #include <thread>
 #include <ISafeQueue.hpp>
+#include <IObservable.hpp>
+#include <IObservable.hpp>
+#include <list>
 #include "orders/IOrder.hpp"
 #include "utils/Factory.hpp"
 
 namespace Plazza
 {
-  class OrderReader
+  class OrderReader : public IObservable
   {
     Factory<IOrder> _factory;
     ISafeQueue<IOrder *> *_orders;
     std::thread *_thread;
     bool _stop;
+    std::list<IObserver *> _observers;
 
    public:
     OrderReader(ISafeQueue<IOrder *> *_ordersQueue);
@@ -25,6 +29,13 @@ namespace Plazza
     ~OrderReader();
 
     void stop();
+
+    virtual void addObserver(IObserver *obs);
+
+    virtual void deleteObserver(IObserver *obs);
+
+   protected:
+    virtual void notify(void);
 
    private:
     void reader();

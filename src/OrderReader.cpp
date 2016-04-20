@@ -2,9 +2,10 @@
 // Created by pogam-_g on 4/11/16.
 //
 
-#include <iostream>
 #include <sstream>
 #include <vector>
+#include <algorithm>
+#include <iostream>
 #include "OrderReader.hpp"
 #include "orders/EmailAddress.hpp"
 #include "orders/IpAddress.hpp"
@@ -71,4 +72,22 @@ void                                Plazza::OrderReader::parseLine(const std::st
       parseCommand(command);
 }
 
+void Plazza::OrderReader::addObserver(IObserver *obs)
+{
+  this->_observers.push_back(obs);
+}
 
+void Plazza::OrderReader::deleteObserver(IObserver *obs)
+{
+  const std::list<IObserver *>::iterator &it = std::find(this->_observers.begin(), this->_observers.end(), obs);
+  if (it != this->_observers.end())
+    this->_observers.erase(it);
+}
+
+void Plazza::OrderReader::notify(void)
+{
+  for (std::list<IObserver *>::iterator it = this->_observers.begin(); it != this->_observers.end(); it++)
+    {
+      (*it)->update();
+    }
+}

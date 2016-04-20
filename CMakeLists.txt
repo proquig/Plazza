@@ -5,8 +5,14 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 find_package(Threads)
 
+include_directories(include)
+
 set(
         SOURCE_FILES
+
+        include/IConnector.hpp
+        include/IObserver.hpp
+        include/ISafeQueue.hpp
 
         src/orders/AOrder.cpp
         src/orders/AOrder.hpp
@@ -30,8 +36,6 @@ set(
         src/utils/Fifo.hpp
         src/utils/Fork.cpp
         src/utils/Fork.hpp
-        src/utils/IConnector.hpp
-        src/utils/ISafeQueue.hpp
         src/utils/Parser.cpp
         src/utils/Parser.hpp
         src/utils/SafeQueue.hpp
@@ -41,8 +45,7 @@ set(
         src/Main.cpp
         src/Main.hpp
         src/OrderReader.cpp
-        src/OrderReader.hpp
-)
+        src/OrderReader.hpp include/IObservable.hpp)
 
 set(
         SOCKET_FILES
