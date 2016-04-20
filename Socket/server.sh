@@ -1,1 +1,1 @@
-g++ main.cpp Socket.cpp Exception.cpp -I. -W -Wall -o serv
+g++ serv.cpp Server.cpp Exception.cpp -I. -W -Wall -o serv
