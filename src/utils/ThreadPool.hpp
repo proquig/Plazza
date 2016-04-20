@@ -24,7 +24,7 @@ namespace Plazza
     bool _stop;
 
    public:
-    ThreadPool(unsigned int threads);
+    ThreadPool(unsigned long threads);
 
     ~ThreadPool();
 

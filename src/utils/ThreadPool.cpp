@@ -4,7 +4,7 @@
 
 #include "ThreadPool.hpp"
 
-Plazza::ThreadPool::ThreadPool(unsigned int theads)
+Plazza::ThreadPool::ThreadPool(unsigned long theads)
 	: _stop(false)
 {
   for (size_t i = 0; i < theads; ++i)
