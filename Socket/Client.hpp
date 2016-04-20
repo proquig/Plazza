@@ -14,9 +14,10 @@
 #include <unistd.h>
 #include <sys/socket.h>
 
+#include "stdio.h"
+
 #define PORT 8080
 
-//template <typename T>
 class Client
 {
  private:
@@ -26,9 +27,42 @@ class Client
  public:
   Client();
   ~Client();
-  void Send(const std::string &);
+  template <class F>
+  void Send(const F &);
   void Receive();
 };
+
+Client::Client()
+{
+  _socket = socket(AF_INET, SOCK_STREAM, 0);
+  _addr_in.sin_addr.s_addr = inet_addr("0.0.0.0");
+  _addr_in.sin_family = AF_INET;
+  _addr_in.sin_port = htons(PORT);
+
+  if(connect(_socket, (sockaddr*)&_addr_in, sizeof(_addr_in)) != -1)
+    printf("Connexion à %s sur le port %d\n", inet_ntoa(_addr_in.sin_addr), htons(_addr_in.sin_port));
+  else
+    printf("Impossible de se connecter\n");
+}
+
+template <class F>
+void Client::Send(const F &buffer)
+{
+  if (send(this->_socket, &buffer, sizeof(buffer), 0) == -1)
+    throw (exception("Can't Send message"));
+}
+
+void Client::Receive()
+{
+  std::string buffer("");
+  if (recv(this->_socket, (void*)buffer.c_str(), 32, 0) == -1)
+    throw (exception("Can't Receive message"));
+}
+
+Client::~Client()
+{
+
+}
 
 
 #endif //CPP_PLAZZA_CLIENT_HPP
