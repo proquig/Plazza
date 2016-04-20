@@ -24,7 +24,11 @@ class Socket
 
  public:
   Socket();
-  Socket(const size_t &);
+
+  Socket(const int &);
+
+  void initSocket(int max_socket);
+
   ~Socket();
 };
 

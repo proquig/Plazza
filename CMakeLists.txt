@@ -44,5 +44,18 @@ set(
         src/OrderReader.hpp
 )
 
+set(
+        SOCKET_FILES
+        Socket/Client.cpp
+        Socket/Client.hpp
+        Socket/client.cpp
+        Socket/Exception.cpp
+        Socket/Exception.hpp
+        Socket/serv.cpp
+        Socket/Server.hpp
+        Socket/Server.cpp
+)
+
+add_executable(socket ${SOCKET_FILES})
 add_executable(cpp_plazza ${SOURCE_FILES})
 target_link_libraries(cpp_plazza ${CMAKE_THREAD_LIBS_INIT})
