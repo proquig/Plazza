@@ -4,6 +4,7 @@
 #include "Parser.hpp"
 #include "ThreadPool.h"
 
+#define PHONE "0[1-9]([ ]?[0-9]){8}\"
 int main(int ac, char **av)
 {
   ThreadPool pool(4);

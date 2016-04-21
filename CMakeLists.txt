@@ -45,7 +45,7 @@ set(
         src/Main.cpp
         src/Main.hpp
         src/OrderReader.cpp
-        src/OrderReader.hpp include/IObservable.hpp)
+        src/OrderReader.hpp include/IObservable.hpp threadPool/Pool.cpp threadPool/Pool.hpp)
 
 set(
         SOCKET_FILES

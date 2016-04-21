@@ -40,7 +40,6 @@ SRCS	= src/orders/AOrder.cpp				\
           src/utils/Fifo.cpp				\
           src/utils/Fork.cpp				\
           src/utils/Parser.cpp				\
-          src/utils/ThreadPool.cpp			\
           src/Main.cpp					\
           src/OrderReader.cpp
 
