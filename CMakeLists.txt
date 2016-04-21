@@ -11,6 +11,7 @@ set(
         SOURCE_FILES
 
         include/IConnector.hpp
+        include/IObservable.hpp
         include/IObserver.hpp
         include/ISafeQueue.hpp
 
@@ -27,6 +28,7 @@ set(
         src/process/Process.cpp
         src/process/Process.hpp
 
+        src/utils/Client.cpp
         src/utils/Decrypt.cpp
         src/utils/Decrypt.hpp
         src/utils/Exception.cpp
@@ -38,14 +40,15 @@ set(
         src/utils/Fork.hpp
         src/utils/Parser.cpp
         src/utils/Parser.hpp
+        src/utils/Regex.cpp
         src/utils/SafeQueue.hpp
-        src/utils/ThreadPool.cpp
-        src/utils/ThreadPool.hpp
+        src/utils/Socket.cpp
 
         src/Main.cpp
         src/Main.hpp
         src/OrderReader.cpp
-        src/OrderReader.hpp include/IObservable.hpp threadPool/Pool.cpp threadPool/Pool.hpp)
+        src/OrderReader.hpp
+)
 
 set(
         SOCKET_FILES
