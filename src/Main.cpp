@@ -4,6 +4,7 @@
 
 #include <algorithm>
 #include "Main.hpp"
+#include "utils/SafeQueue.hpp"
 
 int main(int argc, char *argv[])
 {
