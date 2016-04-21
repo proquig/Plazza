@@ -31,17 +31,20 @@ NAME	= plazza
 OBJDIR = obj
 
 SRCS	= src/orders/AOrder.cpp				\
-          src/orders/EmailAddress.cpp			\
-          src/orders/IpAddress.cpp			\
-          src/orders/PhoneNumber.cpp			\
-          src/process/Process.cpp			\
-          src/utils/Decrypt.cpp				\
-          src/utils/Exception.cpp			\
-          src/utils/Fifo.cpp				\
-          src/utils/Fork.cpp				\
-          src/utils/Parser.cpp				\
-          src/Main.cpp					\
-          src/OrderReader.cpp
+	  src/orders/EmailAddress.cpp			\
+	  src/orders/IpAddress.cpp			\
+	  src/orders/PhoneNumber.cpp			\
+	  src/process/Process.cpp			\
+	  src/utils/Client.cpp				\
+	  src/utils/Decrypt.cpp				\
+	  src/utils/Exception.cpp			\
+	  src/utils/Fifo.cpp				\
+	  src/utils/Fork.cpp				\
+	  src/utils/Parser.cpp				\
+	  src/utils/Regex.cpp				\
+	  src/utils/Socket.cpp				\
+	  src/Main.cpp					\
+	  src/OrderReader.cpp
 
 OBJS	= $(SRCS:src/%.cpp=$(OBJDIR)/%.cpp.o)
 
