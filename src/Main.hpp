@@ -8,7 +8,7 @@
 #include <ISafeQueue.hpp>
 #include <IObserver.hpp>
 #include <list>
-#include "orders/IOrder.hpp"
+#include "IOrder.hpp"
 #include "OrderReader.hpp"
 #include "process/Process.hpp"
 

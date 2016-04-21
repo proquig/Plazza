@@ -19,7 +19,7 @@ set(
         src/orders/AOrder.hpp
         src/orders/EmailAddress.cpp
         src/orders/EmailAddress.hpp
-        src/orders/IOrder.hpp
+        include/IOrder.hpp
         src/orders/IpAddress.cpp
         src/orders/IpAddress.hpp
         src/orders/PhoneNumber.cpp
