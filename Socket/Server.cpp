@@ -35,7 +35,7 @@ void Socket::initSocket(int max_socket)
     throw (exception("Server Can't listen:\n\tError in Server.cpp line 15"));
 
   socklen_t taille = sizeof(csin);
-  if ((fd = accept(_socket, (sockaddr *) &csin, &taille)))
+  if (!(fd = accept(_socket, (sockaddr *) &csin, &taille)))
     throw (exception("Server Can't accept:\n\tError in Server.cpp line 21"));
 
   char buffer[32] = "Bonjour !";

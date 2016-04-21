@@ -5,7 +5,7 @@
 ## Login   <pogam-_g@epitech.net>
 ##
 ## Started on  Sat Mar 19 15:12:40 2016 Gauthier POGAM--LE MONTAGNER
-## Last update Tue Apr 19 23:06:40 2016 Cloquet
+## Last update Thu Apr 21 12:08:50 2016 Cloquet
 ##
 
 DEBUG	= yes
@@ -16,7 +16,7 @@ CC	= g++
 
 RM	= rm -f
 
-CFLAGS	+= -Wextra -Wall
+CFLAGS	+= -Wextra -Wall -I ./include/
 CFLAGS	+= -std=c++11
 CFLAGS	+= -pthread
 

@@ -25,7 +25,7 @@ void Client::Send(const std::string &buffer)
     throw (exception("Can't Send message"));
 }
 
-void Client::Receive()
+F & Client::Receive()
 {
   std::string buffer("");
   if (recv(this->_socket, (void*)buffer.c_str(), 32, 0) == -1)

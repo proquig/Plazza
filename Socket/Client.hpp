@@ -29,7 +29,7 @@ class Client
   ~Client();
   template <class F>
   void Send(const F &);
-  void Receive();
+  std::string &Receive();
 };
 
 Client::Client()
@@ -52,11 +52,12 @@ void Client::Send(const F &buffer)
     throw (exception("Can't Send message"));
 }
 
-void Client::Receive()
+std::string &Client::Receive()
 {
   std::string buffer("");
   if (recv(this->_socket, (void*)buffer.c_str(), 32, 0) == -1)
     throw (exception("Can't Receive message"));
+  return buffer;
 }
 
 Client::~Client()

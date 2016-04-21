@@ -3,10 +3,11 @@
 int main()
 {
   try{
-      Client client;
-      client.Receive();
-
-    }catch(std::exception &e)
+    Client client;
+    
+    client.Receive();
+    
+  }catch(std::exception &e)
     {
       std::cerr << e.what() << std::endl;
     }
