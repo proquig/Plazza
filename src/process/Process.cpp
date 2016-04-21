@@ -25,8 +25,6 @@ Plazza::Process::Process(unsigned long maxThreads, unsigned int id) : id(id)
 Plazza::Process::~Process()
 {
   if (this->_fork->isChild())
-    delete this->_threadPool;
-  else
     {
       delete this->_read;
       delete this->_write;

@@ -8,7 +8,6 @@
 
 #include "../utils/Fork.hpp"
 #include "../utils/Fifo.hpp"
-#include "../utils/ThreadPool.hpp"
 
 namespace Plazza
 {
@@ -19,7 +18,6 @@ namespace Plazza
     Fifo *_fifo[2];
     Fifo *_read;
     Fifo *_write;
-    ThreadPool *_threadPool;
 
    public:
     Process(unsigned long maxThreads, unsigned int id);
