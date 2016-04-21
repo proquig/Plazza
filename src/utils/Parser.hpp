@@ -5,7 +5,7 @@
 // Login   <proqui_g@epitech.net>
 //
 // Started on  Fri Apr 15 13:20:42 2016 Guillaume PROQUIN
-// Last update Tue Apr 19 10:38:54 2016 Guillaume PROQUIN
+// Last update Thu Apr 21 13:13:02 2016 Guillaume PROQUIN
 //
 
 #ifndef		__PARSER_HPP__
@@ -17,6 +17,7 @@
 # include	<regex.h>
 # include	<stdlib.h>
 # include	"Exception.hpp"
+# include	"Regex.hpp"
 
 class		Parser
 {
