@@ -58,6 +58,7 @@ void                                Plazza::OrderReader::parseCommand(const std:
 	{
 	  pOrder->setFile(*it);
 	  this->_orders->push(pOrder);
+	  this->notify();
 	}
     }
 }
