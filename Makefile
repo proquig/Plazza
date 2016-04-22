@@ -5,7 +5,7 @@
 ## Login   <pogam-_g@epitech.net>
 ##
 ## Started on  Sat Mar 19 15:12:40 2016 Gauthier POGAM--LE MONTAGNER
-## Last update Fri Apr 22 11:11:52 2016 Cloquet
+## Last update Fri Apr 22 18:27:32 2016 Cloquet
 ##
 
 DEBUG	= yes
@@ -16,7 +16,7 @@ CC	= g++
 
 RM	= rm -f
 
-CFLAGS	+= -Wextra -Wall -I ./include/
+CFLAGS	+= -Wextra -Wall -W -Werror -I ./include/
 CFLAGS	+= -std=c++11
 CFLAGS	+= -pthread
 
@@ -36,14 +36,13 @@ SRCS	= src/orders/AOrder.cpp				\
 	  src/orders/PhoneNumber.cpp			\
 	  src/process/OrderDispatcher.cpp		\
 	  src/process/Process.cpp			\
-	  src/utils/Client.cpp				\
 	  src/utils/Decrypt.cpp				\
 	  src/utils/Exception.cpp			\
 	  src/utils/Fifo.cpp				\
 	  src/utils/Fork.cpp				\
 	  src/utils/Parser.cpp				\
 	  src/utils/Regex.cpp				\
-	  src/utils/Socket.cpp				\
+	  src/utils/Server.cpp				\
 	  src/Main.cpp					\
 	  src/OrderReader.cpp
 
