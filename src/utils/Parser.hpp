@@ -5,7 +5,7 @@
 // Login   <proqui_g@epitech.net>
 //
 // Started on  Fri Apr 15 13:20:42 2016 Guillaume PROQUIN
-// Last update Fri Apr 22 14:05:55 2016 Guillaume PROQUIN
+// Last update Fri Apr 22 18:10:32 2016 Guillaume PROQUIN
 //
 
 #ifndef		__PARSER_HPP__
@@ -28,7 +28,7 @@ public:
   Parser(const std::string& regex, const std::string& filename);
   virtual 			~Parser();
   std::ifstream&		getFile();
-  regex_t			getRegex();
+  regex_t			getRegex() const;
   std::vector<std::string>	parseLine(std::string& line);
   std::vector<std::string>	parse();
 };

@@ -5,7 +5,7 @@
 // Login   <proqui_g@epitech.net>
 // 
 // Started on  Fri Apr 15 13:16:22 2016 Guillaume PROQUIN
-// Last update Fri Apr 22 14:23:07 2016 Guillaume PROQUIN
+// Last update Fri Apr 22 18:10:12 2016 Guillaume PROQUIN
 //
 
 #include "Parser.hpp"
@@ -29,7 +29,7 @@ std::ifstream&			Parser::getFile()
   return (this->_file);
 }
 
-regex_t				Parser::getRegex()
+regex_t				Parser::getRegex() const
 {
   return (this->_regex);
 }
