@@ -68,8 +68,11 @@ void Plazza::Process::parseMessage(const std::string message)
 Plazza::IOrder *Plazza::Process::deserialize(const std::string &type, const std::string &file)
 {
   Factory<IOrder> factory;
+  IOrder *order;
 
-  return factory.create(type);
+  order = factory.create(type);
+  order->setFile(file);
+  return order;
 }
 
 void Plazza::Process::parseFile(const IOrder &order)

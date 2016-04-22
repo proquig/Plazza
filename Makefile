@@ -16,7 +16,7 @@ CC	= g++
 
 RM	= rm -f
 
-CFLAGS	+= -Wextra -Wall -W -Werror -I ./include/
+CFLAGS	+= -Wextra -Wall -I ./include/
 CFLAGS	+= -std=c++11
 CFLAGS	+= -pthread
 
