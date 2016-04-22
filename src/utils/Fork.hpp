@@ -13,6 +13,7 @@ namespace Plazza
   {
    private:
     pid_t _pid;
+    bool _isChild;
 
    public:
     Fork();
@@ -20,6 +21,8 @@ namespace Plazza
     ~Fork();
 
     bool isChild() const;
+
+    pid_t get_pid() const;
   };
 }
 

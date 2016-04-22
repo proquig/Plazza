@@ -4,9 +4,14 @@
 
 #include "Fork.hpp"
 
-Plazza::Fork::Fork()
+Plazza::Fork::Fork() : _isChild(false)
 {
   this->_pid = fork();
+  if (this->_pid == 0)
+    {
+      this->_isChild = true;
+      this->_pid = getpid();
+    }
 }
 
 Plazza::Fork::~Fork()
@@ -16,5 +21,10 @@ Plazza::Fork::~Fork()
 
 bool Plazza::Fork::isChild() const
 {
-  return this->_pid == 0;
+  return this->_isChild;
+}
+
+pid_t Plazza::Fork::get_pid() const
+{
+  return _pid;
 }
