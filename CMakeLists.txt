@@ -44,7 +44,7 @@ set(
         src/utils/Parser.hpp
         src/utils/Regex.cpp
         src/utils/SafeQueue.hpp
-        src/utils/Server.cpp
+        src/utils/Server.hpp
 
         src/Main.cpp
         src/Main.hpp
