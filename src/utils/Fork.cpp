@@ -16,7 +16,6 @@ Plazza::Fork::Fork() : _isChild(false)
 
 Plazza::Fork::~Fork()
 {
-
 }
 
 bool Plazza::Fork::isChild() const

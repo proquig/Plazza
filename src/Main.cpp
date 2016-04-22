@@ -3,6 +3,7 @@
 //
 
 #include <algorithm>
+#include <wait.h>
 #include "Main.hpp"
 #include "utils/SafeQueue.hpp"
 #include "utils/Parser.hpp"
@@ -36,6 +37,7 @@ Plazza::Main::Main(int argc, char **argv) : _ordersQueue(new SafeQueue<IOrder *>
 Plazza::Main::~Main()
 {
   delete this->_orderReader;
+  wait(NULL);
 }
 
 void Plazza::Main::updateClock()

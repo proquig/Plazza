@@ -15,7 +15,7 @@ Plazza::Process::Process(size_t maxThreads, std::string message) : _maxThreads(m
   this->_fork = new Fork();
   if (this->_fork->isChild())
     {
-      this->_pool = new ThreadPool(maxThreads);
+      //this->_pool = new ThreadPool(maxThreads);
       parseMessage(message);
     }
 }
@@ -60,9 +60,7 @@ void Plazza::Process::parseMessage(const std::string message)
     {
       std::getline(stream, file, ' ');
       order = deserialize(command, file);
-      this->_pool->enqueue([this](IOrder *lorder) {
-	Plazza::Process::parseFile(*lorder);
-      }, order);
+      Plazza::Process::parseFile(*order);
     }
 }
 
@@ -82,6 +80,5 @@ void Plazza::Process::parseFile(const IOrder &order)
   std::vector<std::string> strings;
 
   strings = decrypt.decrypt();
-  for (std::vector<std::string>::iterator it = strings.begin(); it != strings.end(); it++)
-    std::cout << *it << std::endl;
+  std::cout << strings.size() << std::endl;
 }
