@@ -8,6 +8,7 @@
 #include "../utils/Factory.hpp"
 #include "../utils/Parser.hpp"
 #include "../utils/Decrypt.hpp"
+#include "../utils/ThreadPool.hpp"
 
 Plazza::Process::Process(size_t maxThreads) : _maxThreads(maxThreads), _lastAction(clock())
 {

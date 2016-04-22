@@ -45,6 +45,7 @@ set(
         src/utils/Regex.cpp
         src/utils/SafeQueue.hpp
         src/utils/Server.hpp
+        src/utils/ThreadPool.hpp
 
         src/Main.cpp
         src/Main.hpp
