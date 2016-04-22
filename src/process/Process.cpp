@@ -8,12 +8,14 @@
 #include "../utils/Factory.hpp"
 #include "../utils/Parser.hpp"
 #include "../utils/Decrypt.hpp"
+#include "../utils/ThreadPool.hpp"
 
 Plazza::Process::Process(size_t maxThreads) : _maxThreads(maxThreads), _lastAction(clock())
 {
   this->_fork = new Fork();
   if (this->_fork->isChild())
     {
+      this->_pool = new ThreadPool(maxThreads);
     }
 }
 
@@ -57,7 +59,10 @@ void Plazza::Process::parseMessage(const std::string message)
     {
       std::getline(stream, file, ' ');
       order = deserialize(command, file);
-      // TODO : call thread pool
+      _pool->enqueue([this] (IOrder *lorder){
+	    Plazza::Process::parseFile(*lorder);
+	  }, order);
+
     }
 }
 

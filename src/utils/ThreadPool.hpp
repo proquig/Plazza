@@ -18,17 +18,21 @@ public:
     auto enqueue(F&& f, Args&&... args) 
         -> std::future<typename std::result_of<F(Args...)>::type>;
     ~ThreadPool();
+    size_t &getMax();
+
 private:
+    size_t maxThread;
     std::vector< std::thread > workers;
     std::queue< std::function<void()> > tasks;
     std::mutex queue_mutex;
     std::condition_variable condition;
     bool stop;
 };
- 
+
 ThreadPool::ThreadPool(size_t threads)
     :   stop(false)
 {
+  maxThread = threads;
     for(size_t i = 0; i < threads; ++i)
         workers.emplace_back([this]
             {
@@ -83,6 +87,12 @@ ThreadPool::~ThreadPool()
     condition.notify_all();
     for(std::thread &worker: workers)
         worker.join();
+}
+
+
+size_t &ThreadPool::getMax()
+{
+  return this->maxThread;
 }
 
 #endif
