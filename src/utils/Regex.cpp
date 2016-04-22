@@ -5,7 +5,7 @@
 // Login   <proqui_g@epitech.net>
 // 
 // Started on  Thu Apr 21 11:51:51 2016 Guillaume PROQUIN
-// Last update Thu Apr 21 13:09:29 2016 Guillaume PROQUIN
+// Last update Fri Apr 22 13:32:56 2016 Guillaume PROQUIN
 //
 
 #include "Regex.hpp"
@@ -21,10 +21,10 @@ regex_t				Regex::compile(const std::string& regex)
 
 bool				Regex::match(regex_t regex, const std::string& str)
 {
-  regmatch_t			match;
+  regmatch_t			match[2];
   int				no_match;
 
-  no_match = regexec(&regex, str.c_str(), 1, &match, 0);
+  no_match = regexec(&regex, str.c_str(), 1, match, 0);
   if (no_match && no_match != REG_NOMATCH)
     throw (exception("Regex match failed"));
   return (!no_match);

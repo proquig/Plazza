@@ -5,7 +5,7 @@
 // Login   <proqui_g@epitech.net>
 //
 // Started on  Fri Apr 15 13:20:42 2016 Guillaume PROQUIN
-// Last update Thu Apr 21 13:13:02 2016 Guillaume PROQUIN
+// Last update Fri Apr 22 14:05:55 2016 Guillaume PROQUIN
 //
 
 #ifndef		__PARSER_HPP__

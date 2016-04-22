@@ -5,7 +5,7 @@
 // Login   <proqui_g@epitech.net>
 // 
 // Started on  Mon Apr 18 18:52:13 2016 Guillaume PROQUIN
-// Last update Tue Apr 19 13:33:16 2016 Guillaume PROQUIN
+// Last update Fri Apr 22 14:21:36 2016 Guillaume PROQUIN
 //
 
 #include "Decrypt.hpp"
@@ -20,8 +20,6 @@ Decrypt::~Decrypt()
 
 std::vector<std::string>	Decrypt::decryptCaesar(const std::string& line)
 {
-  std::vector<std::string>	ret;
-  std::vector<std::string>	tmp;
   std::string			line_tmp(line);
   int				i;
   unsigned int			j;
@@ -35,34 +33,35 @@ std::vector<std::string>	Decrypt::decryptCaesar(const std::string& line)
 	  line_tmp[j]++;
 	  j++;
 	}
-      tmp = this->parseLine(line_tmp);
-      ret.insert(ret.begin(), tmp.begin(), tmp.end());
+      if (Regex::match(this->getRegex(), line_tmp))
+	return (this->parseLine(line_tmp));
     }
-  return ret;
+  return (std::vector<std::string>());
 }
 
 std::vector<std::string>	Decrypt::decryptXor(const std::string& line)
 {
-  std::vector<std::string>	ret;
-  std::vector<std::string>	tmp;
   std::string			line_tmp;
+  char				key[] = {0, 0};
   int				i;
   unsigned int			j;
 
   i = 0;
-  while (++i < 256)
+  while (++i < 65026)
     {
+      key[0] = i / 256;
+      key[1] = i % 256;
       j = 0;
       line_tmp = line;
       while (j < line_tmp.length())
 	{
-	  line_tmp[j] ^= i;
+	  line_tmp[j] ^= (i < 256) ? key[1] : key[j % 2];
 	  j++;
 	}
-      tmp = this->parseLine(line_tmp);
-      ret.insert(ret.begin(), tmp.begin(), tmp.end());
+      if (Regex::match(this->getRegex(), line_tmp))
+	return (this->parseLine(line_tmp));
     }
-  return ret;
+  return (std::vector<std::string>());
 }
 
 std::vector<std::string>	Decrypt::decrypt()
@@ -71,14 +70,21 @@ std::vector<std::string>	Decrypt::decrypt()
   std::vector<std::string>	tmp;
   std::string			line;
 
-  while (std::getline(Parser::getFile(), line))
+  while (std::getline(this->getFile(), line))
     {
-      tmp = Parser::parseLine(line);
+      tmp.clear();
+      tmp = this->parseLine(line);
       ret.insert(ret.end(), tmp.begin(), tmp.end());
-      tmp = this->decryptCaesar(line);
-      ret.insert(ret.end(), tmp.begin(), tmp.end());
-      tmp = this->decryptXor(line);
-      ret.insert(ret.end(), tmp.begin(), tmp.end());
+      if (tmp.empty())
+	{
+	  tmp = this->decryptCaesar(line);
+	  ret.insert(ret.end(), tmp.begin(), tmp.end());
+	}
+      if (tmp.empty())
+	{
+	  tmp = this->decryptXor(line);
+	  ret.insert(ret.end(), tmp.begin(), tmp.end());
+	}
     }
   return ret;
 }

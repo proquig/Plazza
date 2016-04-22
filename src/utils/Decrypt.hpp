@@ -5,16 +5,17 @@
 // Login   <proqui_g@epitech.net>
 //
 // Started on  Mon Apr 18 18:52:23 2016 Guillaume PROQUIN
-// Last update Tue Apr 19 13:24:39 2016 Guillaume PROQUIN
+// Last update Fri Apr 22 13:20:05 2016 Guillaume PROQUIN
 //
 
-#ifndef                __DECRYPT_HPP__
+#ifndef		__DECRYPT_HPP__
 # define        __DECRYPT_HPP__
 
 # include	<iostream>
 # include	<fstream>
 # include	<vector>
 # include	"Parser.hpp"
+# include	"Regex.hpp"
 
 class		Decrypt : public Parser
 {
