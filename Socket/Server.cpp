@@ -54,6 +54,7 @@ void Socket::initSocket(int max_socket)
 		      if (recv(csock, (void*)buffer.c_str(), 32, 0) == -1)
 			throw (exception("Can't Receive message"));
 		      std::cout << "Le serveur à recus : ["<< buffer.c_str() << "]" << std::endl;
+		      this->_msg = buffer.c_str();
 		      closesocket(csock);
 		      log << "Un client s'est connecte" << std::endl;
 		    }
@@ -61,6 +62,11 @@ void Socket::initSocket(int max_socket)
 	    }
 	}
     }
+}
+
+std::string Socket::getMsg() const
+{
+  return _msg;
 }
 
 Socket::~Socket()
