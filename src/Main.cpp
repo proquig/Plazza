@@ -63,7 +63,7 @@ void Plazza::Main::update() const
   IOrder *order;
 
   order = this->_ordersQueue->pop();
-  this->_orderDispatcher->dispatch(order);
+  this->_orderDispatcher->dispatch(*order);
 }
 
 void Plazza::Main::usage(const char *name)
