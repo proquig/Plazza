@@ -15,6 +15,7 @@
 #include <sys/socket.h>
 #include <fstream>
 #include <errno.h>
+#include <vector>
 
 #define PORT 8080
 #define closesocket(s) close (s)
@@ -29,7 +30,7 @@ class Socket
   int _socket;
   struct sockaddr_in _addr_in;
   std::ofstream log;
-  std::string _msg;
+  std::vector<std::string> _msg;
 
  public:
   Socket();
@@ -40,7 +41,7 @@ class Socket
 
   ~Socket();
 
-  std::string getMsg() const;
+  std::vector<std::string> getMsg() const;
 
   template <typename F>
   void Send(const F &, int);
@@ -82,7 +83,7 @@ void Socket::initSocket(int max_socket, uint16_t port)
 		  if (select(this->_socket + 1, &readfs, NULL, NULL, NULL) < 0)
 		    {
 		      perror("select()");
-		      throw (exception("Error in Select."));
+		      throw (exception(""));
 		    }
 		  if (FD_ISSET(this->_socket, &readfs))
 		    {
@@ -93,7 +94,8 @@ void Socket::initSocket(int max_socket, uint16_t port)
 		      SOCKET csock = accept(this->_socket, (sockaddr *) &csin, (socklen_t *) &crecsize);
 		      if (recv(csock, (void*)buffer.c_str(), 32, 0) == -1)
 			throw (exception("Can't Receive message"));
-		      this->_msg = buffer.c_str();
+		      else
+		      	this->_msg.push_back(buffer.c_str());
 		      closesocket(csock);
 		      log << "Un client s'est connecte" << std::endl;
 		    }
@@ -103,7 +105,7 @@ void Socket::initSocket(int max_socket, uint16_t port)
     }
 }
 
-std::string Socket::getMsg() const
+std::vector<std::string> Socket::getMsg() const
 {
   return _msg;
 }
