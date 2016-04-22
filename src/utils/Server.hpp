@@ -28,6 +28,7 @@ class Socket
   int _socket;
   struct sockaddr_in _addr_in;
   std::ofstream log;
+  std::string _msg;
 
  public:
   Socket();
@@ -37,7 +38,8 @@ class Socket
   void initSocket(int max_socket);
 
   ~Socket();
-};
 
+  std::string getMsg() const;
+};
 
 #endif //CPP_PLAZZA_SOCKET_HPP
