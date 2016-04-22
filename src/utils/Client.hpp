@@ -39,10 +39,8 @@ Client::Client()
   _addr_in.sin_family = AF_INET;
   _addr_in.sin_port = htons(PORT);
 
-  if (connect(_socket, (sockaddr*)&_addr_in, sizeof(_addr_in)) != -1)
-    printf("Connexion à %s sur le port %d\n", inet_ntoa(_addr_in.sin_addr), htons(_addr_in.sin_port));
-  else
-    printf("Impossible de se connecter\n");
+  if (connect(_socket, (sockaddr*)&_addr_in, sizeof(_addr_in)) == -1)
+    throw (exception("Impossible de se connecter"));
 }
 
 template <class F>

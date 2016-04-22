@@ -5,7 +5,7 @@
 ## Login   <pogam-_g@epitech.net>
 ##
 ## Started on  Sat Mar 19 15:12:40 2016 Gauthier POGAM--LE MONTAGNER
-## Last update Fri Apr 22 18:27:32 2016 Cloquet
+## Last update Fri Apr 22 18:51:38 2016 Cloquet
 ##
 
 DEBUG	= yes
@@ -42,7 +42,6 @@ SRCS	= src/orders/AOrder.cpp				\
 	  src/utils/Fork.cpp				\
 	  src/utils/Parser.cpp				\
 	  src/utils/Regex.cpp				\
-	  src/utils/Server.cpp				\
 	  src/Main.cpp					\
 	  src/OrderReader.cpp
 
