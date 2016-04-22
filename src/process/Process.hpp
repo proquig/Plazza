@@ -9,7 +9,8 @@
 #include <IOrder.hpp>
 #include <ctime>
 #include "../utils/Fork.hpp"
-#include "../utils/ThreadPool.h"
+
+class ThreadPool;
 
 namespace Plazza
 {
