@@ -25,10 +25,16 @@ namespace Plazza
 
     bool canAcceptOrder();
 
-    void sendOrder(IOrder *order);
+    void sendOrder(const IOrder &order);
 
    private:
     void updateClock();
+
+    void parseMessage(const std::string message);
+
+    IOrder *deserialize(const std::string &type, const std::string &file);
+
+    void parseFile(const IOrder &order);
   };
 }
 

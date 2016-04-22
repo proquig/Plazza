@@ -3,14 +3,17 @@
 //
 
 #include <iostream>
+#include <sstream>
 #include "Process.hpp"
+#include "../utils/Factory.hpp"
+#include "../utils/Parser.hpp"
+#include "../utils/Decrypt.hpp"
 
 Plazza::Process::Process(size_t maxThreads) : _maxThreads(maxThreads), _lastAction(clock())
 {
   this->_fork = new Fork();
   if (this->_fork->isChild())
     {
-
     }
 }
 
@@ -30,12 +33,47 @@ bool Plazza::Process::canAcceptOrder()
   return false;
 }
 
-void Plazza::Process::sendOrder(IOrder *order)
+void Plazza::Process::sendOrder(const IOrder &order)
 {
-  std::cout << *order << std::endl;
+  std::cout << order << std::endl;
 }
 
 void Plazza::Process::updateClock()
 {
   this->_lastAction = clock();
+}
+
+void Plazza::Process::parseMessage(const std::string message)
+{
+  std::stringstream stream(message);
+  std::string command;
+  std::string file;
+  IOrder *order;
+
+  std::getline(stream, command, ' ');
+  if (command == "canAcceptOrder")
+    {}
+  else
+    {
+      std::getline(stream, file, ' ');
+      order = deserialize(command, file);
+      // TODO : call thread pool
+    }
+}
+
+Plazza::IOrder *Plazza::Process::deserialize(const std::string &type, const std::string &file)
+{
+  Factory<IOrder *> factory;
+
+  return *factory.create(type);
+}
+
+void Plazza::Process::parseFile(const IOrder &order)
+{
+  Decrypt decrypt(order);
+  std::vector<std::string> strings;
+
+  strings = decrypt.decrypt();
+  for (std::vector<std::string>::iterator it = strings.begin(); it != strings.end(); it++)
+    std::cout << *it << std::endl;
 }
