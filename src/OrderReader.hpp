@@ -28,6 +28,8 @@ namespace Plazza
 
     ~OrderReader();
 
+    void start();
+
     void stop();
 
     virtual void addObserver(IObserver *obs);
@@ -35,9 +37,10 @@ namespace Plazza
     virtual void deleteObserver(IObserver *obs);
 
    protected:
-    virtual void notify(void);
 
    private:
+    virtual void notify(void);
+
     void reader();
 
     void parseLine(const std::string &line);

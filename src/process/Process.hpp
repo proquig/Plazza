@@ -1,30 +1,28 @@
 //
-// Created by pogam-_g on 14/04/16.
+// Created by pogam-_g on 22/04/16.
 //
 
 #ifndef CPP_PLAZZA_PROCESS_HPP
 #define CPP_PLAZZA_PROCESS_HPP
 
-
-#include "../utils/Fork.hpp"
-#include "../utils/Fifo.hpp"
+#include <glob.h>
+#include <IOrder.hpp>
 
 namespace Plazza
 {
   class Process
   {
-    unsigned int id;
-    Fork *_fork;
-    Fifo *_fifo[2];
-    Fifo *_read;
-    Fifo *_write;
+    size_t _maxThreads;
 
    public:
-    Process(unsigned long maxThreads, unsigned int id);
+    Process(size_t maxThreads);
 
-    virtual ~Process();
+    ~Process();
+
+    bool canAcceptOrder();
+
+    void sendOrder(IOrder *order);
   };
 }
-
 
 #endif //CPP_PLAZZA_PROCESS_HPP

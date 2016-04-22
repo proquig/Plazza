@@ -34,6 +34,7 @@ SRCS	= src/orders/AOrder.cpp				\
 	  src/orders/EmailAddress.cpp			\
 	  src/orders/IpAddress.cpp			\
 	  src/orders/PhoneNumber.cpp			\
+	  src/process/OrderDispatcher.cpp		\
 	  src/process/Process.cpp			\
 	  src/utils/Client.cpp				\
 	  src/utils/Decrypt.cpp				\

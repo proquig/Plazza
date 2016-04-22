@@ -10,31 +10,31 @@
 #include <list>
 #include "IOrder.hpp"
 #include "OrderReader.hpp"
-#include "process/Process.hpp"
+#include "process/OrderDispatcher.hpp"
 
 namespace Plazza
 {
   class Main : public IObserver
   {
     ISafeQueue<IOrder *> *_ordersQueue;
-    unsigned long _maxThreads;
-    std::vector<Process *> _process;
-    unsigned int _pid;
     std::clock_t *_lastPop;
+    OrderDispatcher *_orderDispatcher;
+    OrderReader *_orderReader;
 
    public:
+
     Main(int argc, char *argv[]);
 
     ~Main();
 
     virtual void update() const;
-
    private:
+
     void updateClock();
 
     IOrder *getOrder(void);
 
-    void usage(char *name);
+    void usage(const char *name);
   };
 }
 

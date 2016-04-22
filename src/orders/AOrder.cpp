@@ -14,7 +14,7 @@ void Plazza::AOrder::setFile(const std::string &file)
   this->_file = file;
 }
 
-std::ostream &operator<<(std::ostream &out, const Plazza::AOrder &order)
+std::ostream &operator<<(std::ostream &out, const Plazza::IOrder &order)
 {
   out << order.getOrder() << " " << order.getFile();
   return (out);

@@ -25,8 +25,8 @@ set(
         src/orders/PhoneNumber.cpp
         src/orders/PhoneNumber.hpp
 
-        src/process/Process.cpp
-        src/process/Process.hpp
+        src/process/OrderDispatcher.cpp
+        src/process/OrderDispatcher.hpp
 
         src/utils/Client.cpp
         src/utils/Decrypt.cpp
@@ -48,7 +48,7 @@ set(
         src/Main.hpp
         src/OrderReader.cpp
         src/OrderReader.hpp
-)
+        src/process/Process.cpp src/process/Process.hpp)
 
 set(
         SOCKET_FILES

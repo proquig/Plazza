@@ -5,30 +5,36 @@
 #include <algorithm>
 #include "Main.hpp"
 #include "utils/SafeQueue.hpp"
+#include "process/OrderDispatcher.hpp"
 
 int main(int argc, char *argv[])
 {
   Plazza::Main(argc, argv);
 }
 
-Plazza::Main::Main(int argc, char **argv) : _ordersQueue(new SafeQueue<IOrder *>()), _pid(0), _lastPop(new std::clock_t)
+Plazza::Main::Main(int argc, char **argv) : _ordersQueue(new SafeQueue<IOrder *>()), _lastPop(new std::clock_t)
 {
+  size_t maxThreads;
+
   if (argc < 2)
     this->usage(argv[0]);
   else
     try
       {
-	this->_maxThreads = std::stoul(argv[1]);
+	maxThreads = std::stoul(argv[1]);
       } catch (std::invalid_argument e)
       {
 	this->usage(argv[0]);
       }
-  new OrderReader(this->_ordersQueue);
-
+  this->_orderReader =  new OrderReader(this->_ordersQueue);
+  this->_orderReader->addObserver(this);
+  this->_orderDispatcher = new OrderDispatcher(maxThreads);
+  this->_orderReader->start();
 }
 
 Plazza::Main::~Main()
 {
+  delete this->_orderReader;
 }
 
 void Plazza::Main::updateClock()
@@ -50,15 +56,18 @@ Plazza::IOrder *Plazza::Main::getOrder(void)
     return nullptr;
 }
 
-void Plazza::Main::usage(char *name)
+void Plazza::Main::update() const
+{
+  IOrder *order;
+
+  order = this->_ordersQueue->pop();
+  this->_orderDispatcher->dispatch(order);
+}
+
+void Plazza::Main::usage(const char *name)
 {
   std::cerr << "Usage: " << name << " <threads>" << "\n"
   << "\t threads: a positive integer which determine the maximum number of threads per processus"
   << std::endl;
   exit(1);
-}
-
-void Plazza::Main::update() const
-{
-  // TODO: assign task
 }

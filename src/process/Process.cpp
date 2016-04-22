@@ -1,33 +1,24 @@
 //
-// Created by pogam-_g on 14/04/16.
+// Created by pogam-_g on 22/04/16.
 //
 
+#include <iostream>
 #include "Process.hpp"
 
-Plazza::Process::Process(unsigned long maxThreads, unsigned int id) : id(id)
+Plazza::Process::Process(size_t maxThreads) : _maxThreads(maxThreads)
 {
-  this->_fifo[0] = new Fifo("plazza-" + std::to_string(id) + "-Main-Process");
-  this->_fifo[1] = new Fifo("plazza-" + std::to_string(id) + "-Process-Main");
-  /*this->_fork = new Fork;
-  if (this->_fork->isChild())
-    {
-      this->_read = this->_fifo[0];
-      this->_write = this->_fifo[1];
-      this->_threadPool = new ThreadPool(maxThreads);
-    }
-  else
-    {
-      this->_read = this->_fifo[1];
-      this->_write = this->_fifo[0];
-    }*/
 }
 
 Plazza::Process::~Process()
 {
-  if (this->_fork->isChild())
-    {
-      delete this->_read;
-      delete this->_write;
-    }
-  delete this->_fork;
+}
+
+bool Plazza::Process::canAcceptOrder()
+{
+  return false;
+}
+
+void Plazza::Process::sendOrder(IOrder *order)
+{
+  std::cout << *order << std::endl;
 }

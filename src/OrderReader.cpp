@@ -17,12 +17,16 @@ Plazza::OrderReader::OrderReader(ISafeQueue<IOrder *> *ordersQueue) : _orders(or
   this->_factory.registerType("IP_ADDRESS", new IpAddress);
   this->_factory.registerType("PHONE_NUMBER", new PhoneNumber);
 
-  this->_thread = new std::thread(&OrderReader::reader, this);
 }
 
 Plazza::OrderReader::~OrderReader()
 {
   this->_thread->join();
+}
+
+void Plazza::OrderReader::start()
+{
+  this->_thread = new std::thread(&OrderReader::reader, this);
 }
 
 void Plazza::OrderReader::stop()

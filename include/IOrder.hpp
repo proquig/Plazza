@@ -27,4 +27,6 @@ namespace Plazza
   };
 }
 
+std::ostream &operator<<(std::ostream &out, const Plazza::IOrder &order);
+
 #endif //CPP_PLAZZA_IORDER_H
