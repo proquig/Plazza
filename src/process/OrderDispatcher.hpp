@@ -26,7 +26,7 @@ namespace Plazza
    private:
     Process * findProcess();
 
-    Process *createProcess();
+    Process *createProcess(const IOrder &order);
   };
 }
 

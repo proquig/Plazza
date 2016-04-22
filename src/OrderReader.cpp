@@ -16,7 +16,6 @@ Plazza::OrderReader::OrderReader(ISafeQueue<IOrder *> *ordersQueue) : _orders(or
   this->_factory.registerType("EMAIL_ADDRESS", new EmailAddress);
   this->_factory.registerType("IP_ADDRESS", new IpAddress);
   this->_factory.registerType("PHONE_NUMBER", new PhoneNumber);
-
 }
 
 Plazza::OrderReader::~OrderReader()

@@ -5,8 +5,6 @@
 #include <algorithm>
 #include "Main.hpp"
 #include "utils/SafeQueue.hpp"
-#include "process/OrderDispatcher.hpp"
-//#include "utils/ThreadPool.hpp"
 #include "utils/Parser.hpp"
 
 int main(int argc, char *argv[])
@@ -14,7 +12,8 @@ int main(int argc, char *argv[])
   Plazza::Main(argc, argv);
 }
 
-Plazza::Main::Main(int argc, char **argv) : _ordersQueue(new SafeQueue<IOrder *>()), _lastPop(new std::clock_t)
+Plazza::Main::Main(int argc, char **argv) : _ordersQueue(new SafeQueue<IOrder *>()), _lastPop(new std::clock_t),
+					    _mainPid(getpid())
 {
   size_t maxThreads;
 
@@ -28,7 +27,7 @@ Plazza::Main::Main(int argc, char **argv) : _ordersQueue(new SafeQueue<IOrder *>
       {
 	this->usage(argv[0]);
       }
-  this->_orderReader =  new OrderReader(this->_ordersQueue);
+  this->_orderReader = new OrderReader(this->_ordersQueue);
   this->_orderReader->addObserver(this);
   this->_orderDispatcher = new OrderDispatcher(maxThreads);
   this->_orderReader->start();
@@ -62,8 +61,11 @@ void Plazza::Main::update() const
 {
   IOrder *order;
 
-  order = this->_ordersQueue->pop();
-  this->_orderDispatcher->dispatch(*order);
+  if (this->_mainPid == getpid())
+    {
+      order = this->_ordersQueue->pop();
+      this->_orderDispatcher->dispatch(*order);
+    }
 }
 
 void Plazza::Main::usage(const char *name)

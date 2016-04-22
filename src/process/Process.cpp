@@ -10,12 +10,13 @@
 #include "../utils/Decrypt.hpp"
 #include "../utils/ThreadPool.h"
 
-Plazza::Process::Process(size_t maxThreads) : _maxThreads(maxThreads), _lastAction(clock())
+Plazza::Process::Process(size_t maxThreads, std::string message) : _maxThreads(maxThreads), _lastAction(clock())
 {
   this->_fork = new Fork();
   if (this->_fork->isChild())
     {
       this->_pool = new ThreadPool(maxThreads);
+      parseMessage(message);
     }
 }
 
@@ -38,7 +39,6 @@ bool Plazza::Process::canAcceptOrder()
 
 void Plazza::Process::sendOrder(const IOrder &order)
 {
-  std::cout << order << std::endl;
 }
 
 void Plazza::Process::updateClock()

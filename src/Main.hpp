@@ -20,6 +20,7 @@ namespace Plazza
     std::clock_t *_lastPop;
     OrderDispatcher *_orderDispatcher;
     OrderReader *_orderReader;
+    pid_t _mainPid;
 
    public:
 

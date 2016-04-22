@@ -17,12 +17,13 @@ namespace Plazza
   class Process
   {
     size_t _maxThreads;
-    Fork *_fork;
     std::clock_t _lastAction;
     ThreadPool *_pool;
 
    public:
-    Process(size_t maxThreads);
+    Fork *_fork;
+
+    Process(size_t maxThreads, std::string message);
 
     ~Process();
 
