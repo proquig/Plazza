@@ -13,13 +13,13 @@ set(
         include/IConnector.hpp
         include/IObservable.hpp
         include/IObserver.hpp
+        include/IOrder.hpp
         include/ISafeQueue.hpp
 
         src/orders/AOrder.cpp
         src/orders/AOrder.hpp
         src/orders/EmailAddress.cpp
         src/orders/EmailAddress.hpp
-        include/IOrder.hpp
         src/orders/IpAddress.cpp
         src/orders/IpAddress.hpp
         src/orders/PhoneNumber.cpp
@@ -27,8 +27,10 @@ set(
 
         src/process/OrderDispatcher.cpp
         src/process/OrderDispatcher.hpp
+        src/process/Process.cpp
+        src/process/Process.hpp
 
-        src/utils/Client.cpp
+        src/utils/Client.hpp
         src/utils/Decrypt.cpp
         src/utils/Decrypt.hpp
         src/utils/Exception.cpp
@@ -42,26 +44,13 @@ set(
         src/utils/Parser.hpp
         src/utils/Regex.cpp
         src/utils/SafeQueue.hpp
-        src/utils/Socket.cpp
+        src/utils/Server.cpp
 
         src/Main.cpp
         src/Main.hpp
         src/OrderReader.cpp
         src/OrderReader.hpp
-        src/process/Process.cpp src/process/Process.hpp)
-
-set(
-        SOCKET_FILES
-        Socket/Client.cpp
-        Socket/Client.hpp
-        Socket/client.cpp
-        Socket/Exception.cpp
-        Socket/Exception.hpp
-        Socket/serv.cpp
-        Socket/Server.hpp
-        Socket/Server.cpp
 )
 
-add_executable(socket ${SOCKET_FILES})
 add_executable(cpp_plazza ${SOURCE_FILES})
 target_link_libraries(cpp_plazza ${CMAKE_THREAD_LIBS_INIT})
