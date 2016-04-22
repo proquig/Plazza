@@ -29,7 +29,7 @@ namespace Plazza
 
     virtual bool tryPop(T *value);
 
-    virtual int pop(void);
+    virtual T pop();
 
     virtual const T &front() const;
 
@@ -72,13 +72,16 @@ bool Plazza::SafeQueue<T>::tryPop(T *value)
 }
 
 template<typename T>
-int Plazza::SafeQueue<T>::pop(void)
+T Plazza::SafeQueue<T>::pop()
 {
+  IOrder *order;
+
   std::unique_lock<std::mutex> lock(_mutex);
   if (this->_queue.empty())
     this->_condVar.wait(lock);
+  order = this->front();
   this->_queue.pop();
-  return (0);
+  return (order);
 }
 
 template<typename T>

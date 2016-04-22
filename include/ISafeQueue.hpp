@@ -10,7 +10,7 @@ namespace Plazza
     virtual ~ISafeQueue(void)
     { }
 
-    virtual int pop(void) = 0;
+    virtual T pop() = 0;
 
     virtual void push(const T value) = 0;
 
