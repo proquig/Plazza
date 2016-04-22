@@ -35,7 +35,7 @@ class Socket
  public:
   Socket();
 
-  Socket(const int &, const uint16_t &);
+  Socket(const int &, uint16_t &);
 
   void initSocket(int max_socket, uint16_t);
 
@@ -52,7 +52,7 @@ Socket::Socket()
   initSocket(5, 8080);
 }
 
-Socket::Socket(const int &max_socket, const uint16_t &port)
+Socket::Socket(const int &max_socket, uint16_t &port)
 	: log("Server.log")
 {
   initSocket(max_socket, port);
