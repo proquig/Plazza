@@ -13,7 +13,7 @@ namespace Plazza
   class PhoneNumber : public AOrder
   {
     const std::string _order = "PHONE_NUMBER";
-    const std::string _regex = "(0|\\+33|0033)[1-9][0-9]{8}";
+    const std::string _regex = "0[1-9]([ ]?[0-9]){8}";
 
    public:
     virtual ~PhoneNumber();

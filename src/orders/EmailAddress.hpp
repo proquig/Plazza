@@ -12,7 +12,7 @@ namespace Plazza
   class EmailAddress : public AOrder
   {
     const std::string _order = "EMAIL_ADDRESS";
-    const std::string _regex = "";
+    const std::string _regex = "[a-zA-Z0-9_.-]+@[a-zA-Z0-9_.-]+\.[a-z]+";
 
    public:
     virtual ~EmailAddress() override;
