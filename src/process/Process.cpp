@@ -13,9 +13,7 @@ Plazza::Process::Process(size_t maxThreads) : _maxThreads(maxThreads), _lastActi
 {
   this->_fork = new Fork();
   if (this->_fork->isChild())
-    {
-      //this->_pool = new ThreadPool(maxThreads);
-    }
+    this->_pool = new ThreadPool(maxThreads);
 }
 
 Plazza::Process::~Process()
@@ -30,7 +28,8 @@ bool Plazza::Process::canAcceptOrder()
        std::string r = this->_reader->read();
        if (r == "true")
          return true;
-    }*/
+    }
+  */
   return false;
 }
 
@@ -58,9 +57,9 @@ void Plazza::Process::parseMessage(const std::string message)
     {
       std::getline(stream, file, ' ');
       order = deserialize(command, file);
-      /*_pool->enqueue([this] (IOrder *lorder){
-	    Plazza::Process::parseFile(*lorder);
-	  }, order);*/
+      _pool->enqueue([this] (IOrder *lorder){
+	  Plazza::Process::parseFile(*lorder);
+	}, order);
     }
 }
 

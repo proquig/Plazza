@@ -9,7 +9,7 @@
 #include <IOrder.hpp>
 #include <ctime>
 #include "../utils/Fork.hpp"
-#include "../utils/ThreadPool.hpp"
+#include "../utils/ThreadPool.h"
 
 namespace Plazza
 {
@@ -18,7 +18,7 @@ namespace Plazza
     size_t _maxThreads;
     Fork *_fork;
     std::clock_t _lastAction;
-    ThreadPool<, IOrder *> *_pool;
+    ThreadPool *_pool;
 
    public:
     Process(size_t maxThreads);
