@@ -4,9 +4,8 @@ int main()
 {
   try{
     Client client;
-    
-    client.Receive();
-    
+
+      client.Send("XD");
   }catch(std::exception &e)
     {
       std::cerr << e.what() << std::endl;
