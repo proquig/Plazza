@@ -5,7 +5,7 @@
 // Login   <proqui_g@epitech.net>
 // 
 // Started on  Mon Apr 18 18:52:13 2016 Guillaume PROQUIN
-// Last update Fri Apr 22 14:21:36 2016 Guillaume PROQUIN
+// Last update Fri Apr 22 17:17:42 2016 Guillaume PROQUIN
 //
 
 #include "Decrypt.hpp"
@@ -47,19 +47,22 @@ std::vector<std::string>	Decrypt::decryptXor(const std::string& line)
   unsigned int			j;
 
   i = 0;
-  while (++i < 65026)
+  while (++i <= 65536)
     {
       key[0] = i / 256;
       key[1] = i % 256;
       j = 0;
       line_tmp = line;
-      while (j < line_tmp.length())
+      if (IS_PRINTABLE((char)(key[0] ^ line_tmp[0])) && IS_PRINTABLE((char)(key[1] ^ line_tmp[1])))
 	{
-	  line_tmp[j] ^= (i < 256) ? key[1] : key[j % 2];
-	  j++;
+	  while (j < line_tmp.length())
+	    {
+	      line_tmp[j] ^= (i < 256) ? key[1] : key[j % 2];
+	      j++;
+	    }
+	  if (Regex::match(this->getRegex(), line_tmp))
+	    return (this->parseLine(line_tmp));
 	}
-      if (Regex::match(this->getRegex(), line_tmp))
-	return (this->parseLine(line_tmp));
     }
   return (std::vector<std::string>());
 }

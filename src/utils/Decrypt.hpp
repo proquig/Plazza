@@ -5,7 +5,7 @@
 // Login   <proqui_g@epitech.net>
 //
 // Started on  Mon Apr 18 18:52:23 2016 Guillaume PROQUIN
-// Last update Fri Apr 22 13:20:05 2016 Guillaume PROQUIN
+// Last update Fri Apr 22 17:11:09 2016 Guillaume PROQUIN
 //
 
 #ifndef		__DECRYPT_HPP__
@@ -16,6 +16,8 @@
 # include	<vector>
 # include	"Parser.hpp"
 # include	"Regex.hpp"
+
+# define	IS_PRINTABLE(C) (C >= 32 && C <= 126)
 
 class		Decrypt : public Parser
 {
