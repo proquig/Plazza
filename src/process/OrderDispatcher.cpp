@@ -12,7 +12,7 @@ Plazza::OrderDispatcher::~OrderDispatcher()
 {
 }
 
-void Plazza::OrderDispatcher::dispatch(IOrder *order)
+void Plazza::OrderDispatcher::dispatch(const IOrder &order)
 {
   Process *process;
 

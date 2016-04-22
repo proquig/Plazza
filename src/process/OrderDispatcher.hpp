@@ -21,7 +21,7 @@ namespace Plazza
 
     ~OrderDispatcher();
 
-    void dispatch(IOrder *order);
+    void dispatch(const IOrder &order);
 
    private:
     Process * findProcess();

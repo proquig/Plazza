@@ -1,24 +1,24 @@
 //
 // Decrypt.cpp for plazza in /home/proqui_g/rendu/cpp_plazza/src/utils
-// 
+//
 // Made by Guillaume PROQUIN
 // Login   <proqui_g@epitech.net>
-// 
+//
 // Started on  Mon Apr 18 18:52:13 2016 Guillaume PROQUIN
 // Last update Fri Apr 22 17:17:42 2016 Guillaume PROQUIN
 //
 
 #include "Decrypt.hpp"
 
-Decrypt::Decrypt(const std::string& regex, const std::string& filename) : Parser(regex, filename)
+Plazza::Decrypt::Decrypt(const IOrder &order) : Parser(order)
 {
 }
 
-Decrypt::~Decrypt()
+Plazza::Decrypt::~Decrypt()
 {
 }
 
-std::vector<std::string>	Decrypt::decryptCaesar(const std::string& line)
+std::vector<std::string>	Plazza::Decrypt::decryptCaesar(const std::string& line)
 {
   std::string			line_tmp(line);
   int				i;
@@ -39,7 +39,7 @@ std::vector<std::string>	Decrypt::decryptCaesar(const std::string& line)
   return (std::vector<std::string>());
 }
 
-std::vector<std::string>	Decrypt::decryptXor(const std::string& line)
+std::vector<std::string>	Plazza::Decrypt::decryptXor(const std::string& line)
 {
   std::string			line_tmp;
   char				key[] = {0, 0};
@@ -67,7 +67,7 @@ std::vector<std::string>	Decrypt::decryptXor(const std::string& line)
   return (std::vector<std::string>());
 }
 
-std::vector<std::string>	Decrypt::decrypt()
+std::vector<std::string>	Plazza::Decrypt::decrypt()
 {
   std::vector<std::string>	ret;
   std::vector<std::string>	tmp;

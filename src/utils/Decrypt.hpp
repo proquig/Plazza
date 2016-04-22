@@ -8,7 +8,7 @@
 // Last update Fri Apr 22 17:11:09 2016 Guillaume PROQUIN
 //
 
-#ifndef		__DECRYPT_HPP__
+#ifndef                __DECRYPT_HPP__
 # define        __DECRYPT_HPP__
 
 # include	<iostream>
@@ -17,19 +17,28 @@
 # include	"Parser.hpp"
 # include	"Regex.hpp"
 
-# define	IS_PRINTABLE(C) (C >= 32 && C <= 126)
+# define        IS_PRINTABLE(C) (C >= 32 && C <= 126)
 
-class		Decrypt : public Parser
+namespace Plazza
 {
-private:
-  std::ifstream	_file;
-  regex_t	_regex;
-public:
-  Decrypt(const std::string& regex, const std::string& filename);
-  virtual 			~Decrypt();
-  std::vector<std::string>	decryptXor(const std::string& line);
-  std::vector<std::string>	decryptCaesar(const std::string& line);
-  std::vector<std::string>	decrypt();
-};
+  class Decrypt : public Parser
+  {
+   private:
+    std::ifstream _file;
+    regex_t _regex;
+
+   public:
+    Decrypt(const IOrder &order);
+
+    virtual ~Decrypt();
+
+    std::vector<std::string> decrypt();
+
+   private:
+    std::vector<std::string> decryptXor(const std::string &line);
+
+    std::vector<std::string> decryptCaesar(const std::string &line);
+  };
+}
 
 #endif

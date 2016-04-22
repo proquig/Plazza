@@ -8,29 +8,39 @@
 // Last update Fri Apr 22 18:10:32 2016 Guillaume PROQUIN
 //
 
-#ifndef		__PARSER_HPP__
-# define	__PARSER_HPP__
+#ifndef                __PARSER_HPP__
+# define        __PARSER_HPP__
 
 # include	<iostream>
 # include	<fstream>
 # include	<vector>
 # include	<regex.h>
 # include	<stdlib.h>
+#include <IOrder.hpp>
 # include	"Exception.hpp"
 # include	"Regex.hpp"
 
-class		Parser
+namespace Plazza
 {
-private:
-  regex_t	_regex;
-  std::ifstream	_file;
-public:
-  Parser(const std::string& regex, const std::string& filename);
-  virtual 			~Parser();
-  std::ifstream&		getFile();
-  regex_t			getRegex() const;
-  std::vector<std::string>	parseLine(std::string& line);
-  std::vector<std::string>	parse();
-};
+  class Parser
+  {
+   private:
+    regex_t _regex;
+    std::ifstream _file;
+
+   public:
+    Parser(const IOrder &order);
+
+    virtual ~Parser();
+
+    std::ifstream &getFile();
+
+    regex_t getRegex() const;
+
+    std::vector<std::string> parseLine(std::string &line);
+
+    std::vector<std::string> parse();
+  };
+}
 
 #endif
