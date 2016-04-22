@@ -12,36 +12,51 @@ Socket::Socket()
 }
 
 Socket::Socket(const int &max_socket)
+: log("Server.log")
 {
   initSocket(max_socket);
 }
 
 void Socket::initSocket(int max_socket)
 {
-  struct sockaddr_in csin;
-  int fd;
-
-  _socket = socket(AF_INET, SOCK_STREAM, 0);
-  _addr_in.sin_addr.s_addr = htonl(INADDR_ANY);
-  _addr_in.sin_family = AF_INET;
-  _addr_in.sin_port = htons(PORT);
-
-  if (bind(this->_socket, (sockaddr *) &_addr_in, sizeof(_addr_in)) == -1)
+  int recsize = sizeof _addr_in;
+  int sock_err = 1;
+  this->_socket = socket(AF_INET, SOCK_STREAM, 0);
+  if(this->_socket != INVALID_SOCKET)
     {
-      perror("bind");
-      throw (exception("Server Can't be bind :\n\tError in Server.cpp line 13"));
+      log  << "La socket "<< this->_socket << "est maintenant ouverte en mode TCP/IP\n";
+      _addr_in.sin_addr.s_addr = htonl(INADDR_ANY);
+      _addr_in.sin_family = AF_INET;
+      _addr_in.sin_port = htons(PORT);
+      if (bind(this->_socket, (sockaddr*) &_addr_in, (socklen_t)recsize) != SOCKET_ERROR)
+	{
+	  sock_err = listen(this->_socket, max_socket);
+	  log << "Listage du port " << PORT << "..." << std::endl;
+	  if(sock_err != SOCKET_ERROR)
+	    {
+	      fd_set readfs;
+	      while(1)
+		{
+		  FD_ZERO(&readfs);
+		  FD_SET(this->_socket, &readfs);
+		  if (select(this->_socket + 1, &readfs, NULL, NULL, NULL) < 0)
+		    {
+		      perror("select()");
+		      throw (exception("Error in Select."));
+		    }
+		  if (FD_ISSET(this->_socket, &readfs))
+		    {
+		      struct sockaddr_in csin;
+		      int crecsize = sizeof csin;
+
+		      SOCKET csock = accept(this->_socket, (sockaddr *) &csin, (socklen_t *) &crecsize);
+		      closesocket(csock);
+		      log << "Un client s'est connecte" << std::endl;
+		    }
+		}
+	    }
+	}
     }
-  if (listen(this->_socket, max_socket) == -1)
-    throw (exception("Server Can't listen:\n\tError in Server.cpp line 15"));
-
-  socklen_t taille = sizeof(csin);
-  if (!(fd = accept(_socket, (sockaddr *) &csin, &taille)))
-    throw (exception("Server Can't accept:\n\tError in Server.cpp line 21"));
-
-  char buffer[32] = "Bonjour !";
-  if (send(fd, buffer, sizeof(buffer), 0) == -1)
-    throw (exception("Server can't send msg:\n\tError in Server.cpp line 21"));
-  shutdown(fd, 2);
 }
 
 Socket::~Socket()

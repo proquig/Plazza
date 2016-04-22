@@ -13,14 +13,21 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <sys/socket.h>
+#include <fstream>
 
 #define PORT 8080
+#define closesocket(s) close (s)
+#define INVALID_SOCKET -1
+#define SOCKET_ERROR -1
+
+typedef int SOCKET;
 
 class Socket
 {
  private:
   int _socket;
   struct sockaddr_in _addr_in;
+  std::ofstream log;
 
  public:
   Socket();
