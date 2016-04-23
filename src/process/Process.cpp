@@ -39,6 +39,7 @@ bool Plazza::Process::canAcceptOrder()
 
 void Plazza::Process::sendOrder(const IOrder &order)
 {
+  (void)order;
 }
 
 void Plazza::Process::updateClock()
