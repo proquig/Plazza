@@ -63,6 +63,8 @@ void                                Plazza::OrderReader::parseCommand(const std:
 	  this->_orders->push(pOrder);
 	  this->notify();
 	}
+      else
+	std::cerr << "Error: Invalid order " << orderType << std::endl;
     }
 }
 
