@@ -25,7 +25,6 @@ namespace Plazza
   {
    private:
     std::ifstream	_file;
-    regex_t		_regex;
     bool		_isEncrypted;
 
   public:

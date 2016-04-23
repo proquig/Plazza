@@ -20,17 +20,20 @@ Plazza::Main::Main(int argc, char **argv) : _ordersQueue(new SafeQueue<IOrder *>
   if (argc < 2)
     this->usage(argv[0]);
   else
-    try
-      {
-	maxThreads = std::stoul(argv[1]);
-      } catch (std::invalid_argument e)
-      {
-	this->usage(argv[0]);
-      }
-  this->_orderReader = new OrderReader(this->_ordersQueue);
-  this->_orderReader->addObserver(this);
-  this->_orderDispatcher = new OrderDispatcher(maxThreads);
-  this->_orderReader->start();
+    {
+      try
+	{
+	  maxThreads = std::stoul(argv[1]);
+	} catch (std::invalid_argument e)
+	{
+	  this->usage(argv[0]);
+	}
+
+      this->_orderReader = new OrderReader(this->_ordersQueue);
+      this->_orderReader->addObserver(this);
+      this->_orderDispatcher = new OrderDispatcher(maxThreads);
+      this->_orderReader->start();
+    }
 }
 
 Plazza::Main::~Main()
