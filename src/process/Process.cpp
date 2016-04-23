@@ -10,15 +10,16 @@
 #include "../utils/Decrypt.hpp"
 #include "ThreadPool.hpp"
 
-Plazza::Process::Process(size_t maxThreads, std::string message) : _lastAction(clock()), _pool(nullptr)
+Plazza::Process::Process(size_t maxThreads, std::string message)
+	: _lastAction(std::time(nullptr)), _pool(nullptr), _ordersRunning(0)
 {
   this->_fork = new Fork();
   if (this->_fork->isChild())
     {
       this->_pool = new ThreadPool(maxThreads, &parseFile);
+      this->_pool->addObserver(this);
       parseMessage(message);
-      sleep(2);
-      //this->stop();
+      this->_timeTracker = new std::thread(&Process::timeTracker, this);
     }
 }
 
@@ -45,6 +46,29 @@ void Plazza::Process::stop()
   delete (this);
 }
 
+void Plazza::Process::update()
+{
+  this->_ordersRunning--;
+  if (this->_ordersRunning == 0)
+    this->_lastAction = std::time(nullptr);
+}
+
+void Plazza::Process::timeTracker()
+{
+  for (;;)
+    {
+      if (this->_ordersRunning == 0)
+	{
+	  if (std::time(nullptr) - this->_lastAction >= 2)
+	    {
+	      this->stop();
+	      return;
+	    }
+	}
+      usleep(100);
+    }
+}
+
 void Plazza::Process::parseMessage(const std::string message)
 {
   std::stringstream stream(message);
@@ -59,6 +83,7 @@ void Plazza::Process::parseMessage(const std::string message)
     {
       std::getline(stream, file, ' ');
       order = deserialize(command, file);
+      this->_ordersRunning++;
       this->_pool->enqueue(*order);
     }
 }
@@ -89,3 +114,5 @@ void Plazza::Process::parseFile(const IOrder &order)
       std::cerr << e.what() << std::endl;
     }
 }
+
+

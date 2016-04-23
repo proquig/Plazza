@@ -8,16 +8,20 @@
 #include <glob.h>
 #include <IOrder.hpp>
 #include <ctime>
+#include <IObserver.hpp>
+#include <thread>
 #include "../utils/Fork.hpp"
 
 namespace Plazza
 {
   class ThreadPool;
 
-  class Process
+  class Process : public IObserver
   {
-    std::clock_t _lastAction;
+    std::time_t _lastAction;
     ThreadPool *_pool;
+    size_t _ordersRunning;
+    std::thread *_timeTracker;
 
    public:
     Fork *_fork;
@@ -32,7 +36,11 @@ namespace Plazza
 
     void stop();
 
+    virtual void update();
+
    private:
+    void timeTracker();
+
     void parseMessage(const std::string message);
 
     IOrder *deserialize(const std::string &type, const std::string &file);

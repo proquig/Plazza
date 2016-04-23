@@ -28,10 +28,9 @@ namespace Plazza
 
     ~Main();
 
-    virtual void update() const;
-   private:
+    virtual void update();
 
-    void updateClock();
+   private:
 
     IOrder *getOrder(void);
 

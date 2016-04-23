@@ -11,6 +11,9 @@
 #include <IOrder.hpp>
 #include <queue>
 #include <ISafeQueue.hpp>
+#include <IObservable.hpp>
+#include <list>
+#include <algorithm>
 #include "../utils/SafeQueue.hpp"
 #include "Process.hpp"
 
@@ -18,10 +21,11 @@ namespace Plazza
 {
   class Process;
 
-  class ThreadPool
+  class ThreadPool : public IObservable
   {
     std::vector<std::thread *> _threads;
     ISafeQueue<IOrder*> *_orders;
+    std::list<IObserver *> _observers;
     bool _stop;
     void (*_func)(const IOrder &);
 
@@ -33,6 +37,13 @@ namespace Plazza
     void enqueue(IOrder &order);
 
     void stop();
+
+    virtual void addObserver(IObserver *obs);
+
+    virtual void deleteObserver(IObserver *obs);
+
+   protected:
+    virtual void notify(void);
 
    private:
     void run();
@@ -61,6 +72,29 @@ namespace Plazza
     this->_orders->push(&order);
   }
 
+  void ThreadPool::stop()
+  {
+    this->_stop = true;
+  }
+
+  void ThreadPool::addObserver(IObserver *obs)
+  {
+    this->_observers.push_back(obs);
+  }
+
+  void ThreadPool::deleteObserver(IObserver *obs)
+  {
+    const std::list<IObserver *>::iterator &it = std::find(this->_observers.begin(), this->_observers.end(), obs);
+    if (it != this->_observers.end())
+      this->_observers.erase(it);
+  }
+
+  void ThreadPool::notify(void)
+  {
+    for (std::list<IObserver *>::iterator it = this->_observers.begin(); it != this->_observers.end(); it++)
+      (*it)->update();
+  }
+
   void ThreadPool::run()
   {
     IOrder *order;
@@ -70,15 +104,11 @@ namespace Plazza
 	if (this->_orders->tryPop(&order))
 	  {
 	    _func(*order);
+	    notify();
 	  }
 	else
 	  usleep(100);
       }
-  }
-
-  void ThreadPool::stop()
-  {
-    this->_stop = true;
   }
 }
 

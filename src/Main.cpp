@@ -12,8 +12,7 @@ int main(int argc, char *argv[])
   Plazza::Main(argc, argv);
 }
 
-Plazza::Main::Main(int argc, char **argv) : _ordersQueue(new SafeQueue<IOrder *>()), _lastPop(new std::clock_t),
-					    _mainPid(getpid())
+Plazza::Main::Main(int argc, char **argv) : _ordersQueue(new SafeQueue<IOrder *>()), _mainPid(getpid())
 {
   size_t maxThreads;
 
@@ -40,13 +39,6 @@ Plazza::Main::~Main()
 {
   delete this->_orderReader;
   delete this->_orderDispatcher;
-  std::cout << "Main: exit" << std::endl;
-}
-
-void Plazza::Main::updateClock()
-{
-  delete this->_lastPop;
-  this->_lastPop = new std::clock_t;
 }
 
 Plazza::IOrder *Plazza::Main::getOrder(void)
@@ -55,14 +47,13 @@ Plazza::IOrder *Plazza::Main::getOrder(void)
 
   if (this->_ordersQueue->tryPop(&order))
     {
-      this->updateClock();
       return order;
     }
   else
     return nullptr;
 }
 
-void Plazza::Main::update() const
+void Plazza::Main::update()
 {
   IOrder *order;
 

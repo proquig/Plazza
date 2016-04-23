@@ -12,7 +12,7 @@ class IObserver
  public:
   virtual ~IObserver() {}
 
-  virtual void update() const = 0;
+  virtual void update() = 0;
 };
 
 #endif //CPP_PLAZZA_IOBSERVER_HPP
