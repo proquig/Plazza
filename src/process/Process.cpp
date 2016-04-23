@@ -61,12 +61,20 @@ void Plazza::Process::parseMessage(const std::string message)
       std::getline(stream, file, ' ');
       order = deserialize(command, file);
       _pool->enqueue([](IOrder *iOrder){
-	Decrypt decrypt(*iOrder);
-	std::vector<std::string> strings;
+	try
+	  {
+	    Decrypt decrypt(*iOrder);
+	    std::vector<std::string> strings;
 
-	strings = decrypt.decrypt();
-	for (std::vector<std::string>::iterator it = strings.begin(); it != strings.end(); it++)
-	  std::cout << *it << std::endl;
+	    strings = decrypt.decrypt();
+	    for (std::vector<std::string>::iterator it = strings.begin(); it != strings.end(); it++)
+	      std::cout << *it << std::endl;
+	  }
+	catch (std::exception &e)
+	  {
+	    std::cerr << e.what() << std::endl;
+	  }
+
       }, order);
     }
 }
