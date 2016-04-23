@@ -5,10 +5,10 @@
 // Login   <proqui_g@epitech.net>
 //
 // Started on  Mon Apr 18 18:52:23 2016 Guillaume PROQUIN
-// Last update Fri Apr 22 17:11:09 2016 Guillaume PROQUIN
+// Last update Sat Apr 23 02:46:29 2016 Guillaume PROQUIN
 //
 
-#ifndef                __DECRYPT_HPP__
+#ifndef		__DECRYPT_HPP__
 # define        __DECRYPT_HPP__
 
 # include	<iostream>
@@ -24,19 +24,16 @@ namespace Plazza
   class Decrypt : public Parser
   {
    private:
-    std::ifstream _file;
-    regex_t _regex;
+    std::ifstream	_file;
+    regex_t		_regex;
+    bool		_isEncrypted;
 
-   public:
+  public:
     Decrypt(const IOrder &order);
-
     virtual ~Decrypt();
-
     std::vector<std::string> decrypt();
-
-   private:
+  private:
     std::vector<std::string> decryptXor(const std::string &line);
-
     std::vector<std::string> decryptCaesar(const std::string &line);
   };
 }

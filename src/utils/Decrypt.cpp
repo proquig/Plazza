@@ -5,13 +5,14 @@
 // Login   <proqui_g@epitech.net>
 //
 // Started on  Mon Apr 18 18:52:13 2016 Guillaume PROQUIN
-// Last update Fri Apr 22 17:17:42 2016 Guillaume PROQUIN
+// Last update Sat Apr 23 02:46:08 2016 Guillaume PROQUIN
 //
 
 #include "Decrypt.hpp"
 
 Plazza::Decrypt::Decrypt(const IOrder &order) : Parser(order)
 {
+  this->_isEncrypted = !order.getFile().find('.');
 }
 
 Plazza::Decrypt::~Decrypt()
@@ -78,12 +79,12 @@ std::vector<std::string>	Plazza::Decrypt::decrypt()
       tmp.clear();
       tmp = this->parseLine(line);
       ret.insert(ret.end(), tmp.begin(), tmp.end());
-      if (tmp.empty())
+      if (this->_isEncrypted && tmp.empty())
 	{
 	  tmp = this->decryptCaesar(line);
 	  ret.insert(ret.end(), tmp.begin(), tmp.end());
 	}
-      if (tmp.empty())
+      if (this->_isEncrypted && tmp.empty())
 	{
 	  tmp = this->decryptXor(line);
 	  ret.insert(ret.end(), tmp.begin(), tmp.end());
