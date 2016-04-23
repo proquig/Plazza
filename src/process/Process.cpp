@@ -65,7 +65,8 @@ void Plazza::Process::parseMessage(const std::string message)
 	std::vector<std::string> strings;
 
 	strings = decrypt.decrypt();
-	std::cout << strings.size() << std::endl;
+	for (std::vector<std::string>::iterator it = strings.begin(); it != strings.end(); it++)
+	  std::cout << *it << std::endl;
       }, order);
     }
 }
