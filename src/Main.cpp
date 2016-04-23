@@ -40,6 +40,7 @@ Plazza::Main::~Main()
 {
   delete this->_orderReader;
   delete this->_orderDispatcher;
+  std::cout << "Main: exit" << std::endl;
 }
 
 void Plazza::Main::updateClock()

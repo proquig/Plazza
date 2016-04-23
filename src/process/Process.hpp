@@ -10,13 +10,12 @@
 #include <ctime>
 #include "../utils/Fork.hpp"
 
-class ThreadPool;
-
 namespace Plazza
 {
+  class ThreadPool;
+
   class Process
   {
-    size_t _maxThreads;
     std::clock_t _lastAction;
     ThreadPool *_pool;
 
@@ -31,14 +30,14 @@ namespace Plazza
 
     void sendOrder(const IOrder &order);
 
-   private:
-    void updateClock();
+    void stop();
 
+   private:
     void parseMessage(const std::string message);
 
     IOrder *deserialize(const std::string &type, const std::string &file);
 
-    void parseFile(const IOrder &order);
+    static void parseFile(const IOrder &order);
   };
 }
 

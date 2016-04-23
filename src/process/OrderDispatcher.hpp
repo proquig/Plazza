@@ -6,14 +6,14 @@
 #define CPP_PLAZZA_ORDERDISPATCHER_HPP
 
 #include <IOrder.hpp>
-#include <vector>
+#include <list>
 #include "Process.hpp"
 
 namespace Plazza
 {
   class OrderDispatcher
   {
-    std::vector<Process *> _process;
+    std::list<Process *> _process;
     size_t _maxThreads;
 
    public:

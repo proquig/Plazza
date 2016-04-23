@@ -12,8 +12,16 @@ Plazza::OrderDispatcher::OrderDispatcher(size_t maxThreads) : _maxThreads(maxThr
 
 Plazza::OrderDispatcher::~OrderDispatcher()
 {
-  for (std::vector<Process *>::iterator it = this->_process.begin(); it != this->_process.end(); it++)
-    waitpid((*it)->_fork->get_pid(), NULL, 0);
+  Process *process;
+
+  for (std::list<Process *>::iterator it = this->_process.begin(); it != this->_process.end(); it++)
+    {
+      std::cout << "wait" << std::endl;
+      waitpid((*it)->_fork->get_pid(), NULL, 0);
+      process = this->_process.front();
+      delete process;
+    }
+  std::cout << "OrderDispatcher: exit" << std::endl;
 }
 
 void Plazza::OrderDispatcher::dispatch(const IOrder &order)
@@ -29,7 +37,7 @@ void Plazza::OrderDispatcher::dispatch(const IOrder &order)
 
 Plazza::Process *Plazza::OrderDispatcher::findProcess()
 {
-  for (std::vector<Process *>::iterator it = this->_process.begin(); it != this->_process.end(); it++)
+  for (std::list<Process *>::iterator it = this->_process.begin(); it != this->_process.end(); it++)
     if ((*it)->canAcceptOrder())
       return (*it);
   return nullptr;

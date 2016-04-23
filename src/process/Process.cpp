@@ -8,32 +8,29 @@
 #include "../utils/Factory.hpp"
 #include "../utils/Parser.hpp"
 #include "../utils/Decrypt.hpp"
-#include "../utils/ThreadPool.h"
+#include "ThreadPool.hpp"
 
-Plazza::Process::Process(size_t maxThreads, std::string message) : _maxThreads(maxThreads), _lastAction(clock())
+Plazza::Process::Process(size_t maxThreads, std::string message) : _lastAction(clock()), _pool(nullptr)
 {
   this->_fork = new Fork();
   if (this->_fork->isChild())
     {
-      this->_pool = new ThreadPool(maxThreads);
+      this->_pool = new ThreadPool(maxThreads, &parseFile);
       parseMessage(message);
+      sleep(2);
+      //this->stop();
     }
 }
 
 Plazza::Process::~Process()
 {
+  if (this->_pool != nullptr)
+    delete this->_pool;
+  delete this->_fork;
 }
 
 bool Plazza::Process::canAcceptOrder()
 {
-  /*if (!this->_fork->isChild())
-    {
-       this->_writer->write("canAcceptOrder");
-       std::string r = this->_reader->read();
-       if (r == "true")
-         return true;
-    }
-  */
   return false;
 }
 
@@ -42,9 +39,10 @@ void Plazza::Process::sendOrder(const IOrder &order)
   (void)order;
 }
 
-void Plazza::Process::updateClock()
+void Plazza::Process::stop()
 {
-  this->_lastAction = clock();
+  this->_pool->stop();
+  delete (this);
 }
 
 void Plazza::Process::parseMessage(const std::string message)
@@ -61,22 +59,7 @@ void Plazza::Process::parseMessage(const std::string message)
     {
       std::getline(stream, file, ' ');
       order = deserialize(command, file);
-      _pool->enqueue([](IOrder *iOrder){
-	try
-	  {
-	    Decrypt decrypt(*iOrder);
-	    std::vector<std::string> strings;
-
-	    strings = decrypt.decrypt();
-	    for (std::vector<std::string>::iterator it = strings.begin(); it != strings.end(); it++)
-	      std::cout << *it << std::endl;
-	  }
-	catch (std::exception &e)
-	  {
-	    std::cerr << e.what() << std::endl;
-	  }
-
-      }, order);
+      this->_pool->enqueue(*order);
     }
 }
 
@@ -92,9 +75,17 @@ Plazza::IOrder *Plazza::Process::deserialize(const std::string &type, const std:
 
 void Plazza::Process::parseFile(const IOrder &order)
 {
-  Decrypt decrypt(order);
-  std::vector<std::string> strings;
+  try
+    {
+      Decrypt decrypt(order);
+      std::vector<std::string> strings;
 
-  strings = decrypt.decrypt();
-  std::cout << strings.size() << std::endl;
+      strings = decrypt.decrypt();
+      for (std::vector<std::string>::iterator it = strings.begin(); it != strings.end(); it++)
+	std::cout << *it << std::endl;
+    }
+  catch (std::exception &e)
+    {
+      std::cerr << e.what() << std::endl;
+    }
 }

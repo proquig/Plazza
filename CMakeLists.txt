@@ -29,6 +29,7 @@ set(
         src/process/OrderDispatcher.hpp
         src/process/Process.cpp
         src/process/Process.hpp
+        src/process/ThreadPool.hpp
 
         src/utils/Client.hpp
         src/utils/Decrypt.cpp
@@ -45,7 +46,6 @@ set(
         src/utils/Regex.cpp
         src/utils/SafeQueue.hpp
         src/utils/Server.hpp
-        src/utils/ThreadPool.h
 
         src/Main.cpp
         src/Main.hpp
