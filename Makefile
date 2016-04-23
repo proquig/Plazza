@@ -1,27 +1,17 @@
-##
-## Makefile for PSU_2015_lemipc in /home/pogam-_g/ClionProjects/PSU_2015_lemipc
-##
-## Made by Gauthier POGAM--LE MONTAGNER
-## Login   <pogam-_g@epitech.net>
-##
-## Started on  Sat Mar 19 15:12:40 2016 Gauthier POGAM--LE MONTAGNER
-## Last update Fri Apr 22 18:51:38 2016 Cloquet
-##
+DEBUG		= yes
 
-DEBUG	= yes
+DETAILS		= no
 
-DETAILS	= no
+C++		= g++
 
-CC	= g++
+RM		= rm -f
 
-RM	= rm -f
-
-CFLAGS	+= -Wextra -Wall -I ./include/
-CFLAGS	+= -std=c++11
-CFLAGS	+= -pthread
+CXXFLAGS	+= -Wextra -Wall -I ./include/
+CXXFLAGS	+= -std=c++11
+CXXFLAGS	+= -pthread
 
 ifeq ($(DEBUG),yes)
-	CFLAGS	+= -g
+	CXXFLAGS	+= -g
 endif
 
 LDFLAGS	+= -pthread
@@ -54,26 +44,27 @@ pre-build:
 	@echo "Options :"
 	@echo -e "\tDebug:\t\t$(DEBUG)"
 	@echo -e "\tDetails:\t$(DETAILS)"
-	@echo -e "\tCFLAGS:\t\t$(CFLAGS)"
+	@echo -e "\tCompiler:\t$(C++)"
+	@echo -e "\tCXXFLAGS:\t$(CXXFLAGS)"
 	@echo -e "\tLDFLAGS:\t$(LDFLAGS)"
 	@echo "Start objects compilation."
 
 $(NAME):	$(OBJS)
 	@echo -e "Linking $(NAME)."
 ifeq ($(DETAILS),yes)
-	$(CC) $(LDFLAGS) $(OBJS) -o $(NAME)
+	$(C++) $(LDFLAGS) $(OBJS) -o $(NAME)
 else
-	@$(CC) $(LDFLAGS) $(OBJS) -o $(NAME)
+	@$(C++) $(LDFLAGS) $(OBJS) -o $(NAME)
 endif
 	@echo "$(NAME) compiled."
 
 $(OBJDIR)/%.cpp.o:	src/%.cpp
 	@mkdir -p $(dir $@)
 ifeq ($(DETAILS),yes)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(C++) $(CXXFLAGS) -c $< -o $@
 else
 	@echo -e "Compile:\t$<"
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(C++) $(CXXFLAGS) -c $< -o $@
 endif
 
 .NOTPARALLEL: fclean clean
