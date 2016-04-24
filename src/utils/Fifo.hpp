@@ -30,9 +30,9 @@ namespace Plazza
 
     ~Fifo();
 
-    std::ifstream &writeIn();
+    void write(const std::string &message);
 
-    std::ofstream &readIn();
+    std::string read();
   };
 }
 
