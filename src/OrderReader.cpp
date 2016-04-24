@@ -11,7 +11,7 @@
 #include "orders/IpAddress.hpp"
 #include "orders/PhoneNumber.hpp"
 
-Plazza::OrderReader::OrderReader(ISafeQueue<IOrder *> *ordersQueue) : _orders(ordersQueue), _stop(false)
+Plazza::OrderReader::OrderReader(ISafeQueue<IOrder *> *ordersQueue) : _orders(ordersQueue)
 {
   this->_factory.registerType("EMAIL_ADDRESS", new EmailAddress);
   this->_factory.registerType("IP_ADDRESS", new IpAddress);
@@ -28,16 +28,11 @@ void Plazza::OrderReader::start()
   this->_thread = new std::thread(&OrderReader::reader, this);
 }
 
-void Plazza::OrderReader::stop()
-{
-  this->_stop = true;
-}
-
 void                                Plazza::OrderReader::reader()
 {
   std::string line;
 
-  while (!this->_stop && std::getline(std::cin, line))
+  while (std::getline(std::cin, line))
     parseLine(line);
 }
 

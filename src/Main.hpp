@@ -17,7 +17,6 @@ namespace Plazza
   class Main : public IObserver
   {
     ISafeQueue<IOrder *> *_ordersQueue;
-    std::clock_t *_lastPop;
     OrderDispatcher *_orderDispatcher;
     OrderReader *_orderReader;
     pid_t _mainPid;
