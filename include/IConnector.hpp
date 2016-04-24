@@ -11,12 +11,13 @@ namespace Plazza
 {
   class IConnector
   {
+   public:
     virtual ~IConnector()
     { }
 
-    virtual void writeIn(const std::string &) = 0;
+    virtual void write(const std::string &) = 0;
 
-    virtual std::string &readIn() = 0;
+    virtual std::string read() = 0;
 
     virtual const std::string &getPath() const = 0;
   };

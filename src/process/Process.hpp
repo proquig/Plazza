@@ -12,6 +12,7 @@
 #include <thread>
 #include <vector>
 #include <ISafeQueue.hpp>
+#include <IConnector.hpp>
 #include "../utils/Fork.hpp"
 #include "../utils/Fifo.hpp"
 
@@ -24,9 +25,9 @@ namespace Plazza
     std::time_t _lastAction;
     ThreadPool *_pool;
     size_t _ordersRunning;
-    std::vector<Fifo *> _fifos;
-    Fifo *_writer;
-    Fifo *_reader;
+    std::vector<IConnector *> _fifos;
+    IConnector *_writer;
+    IConnector *_reader;
     size_t _maxThreads;
 
    public:

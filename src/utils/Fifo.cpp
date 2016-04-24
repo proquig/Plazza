@@ -37,3 +37,8 @@ std::string	Plazza::Fifo::read()
   std::getline(this->_in, message);
   return message;
 }
+
+const std::string &Plazza::Fifo::getPath() const
+{
+  return this->_path;
+}

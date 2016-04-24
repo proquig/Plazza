@@ -13,11 +13,12 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <IConnector.hpp>
 #include "Exception.hpp"
 
 namespace Plazza
 {
-  class Fifo
+  class Fifo : public IConnector
   {
    private:
     std::string _name;
@@ -30,9 +31,11 @@ namespace Plazza
 
     ~Fifo();
 
-    void write(const std::string &message);
+    virtual void write(const std::string &message) override;
 
-    std::string read();
+    virtual std::string read() override;
+
+    virtual const std::string & getPath() const;
   };
 }
 
