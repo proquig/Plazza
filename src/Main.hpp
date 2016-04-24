@@ -31,8 +31,6 @@ namespace Plazza
 
    private:
 
-    IOrder *getOrder(void);
-
     void usage(const char *name);
   };
 }

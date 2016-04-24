@@ -21,6 +21,7 @@ namespace Plazza
     ISafeQueue<IOrder *> *_orders;
     std::thread *_thread;
     std::list<IObserver *> _observers;
+    pid_t _mainPid;
 
    public:
     OrderReader(ISafeQueue<IOrder *> *_ordersQueue);

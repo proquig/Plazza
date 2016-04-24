@@ -6,12 +6,13 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
+#include <unistd.h>
 #include "OrderReader.hpp"
 #include "orders/EmailAddress.hpp"
 #include "orders/IpAddress.hpp"
 #include "orders/PhoneNumber.hpp"
 
-Plazza::OrderReader::OrderReader(ISafeQueue<IOrder *> *ordersQueue) : _orders(ordersQueue)
+Plazza::OrderReader::OrderReader(ISafeQueue<IOrder *> *ordersQueue) : _orders(ordersQueue), _mainPid(getpid())
 {
   this->_factory.registerType("EMAIL_ADDRESS", new EmailAddress);
   this->_factory.registerType("IP_ADDRESS", new IpAddress);
@@ -32,7 +33,7 @@ void                                Plazza::OrderReader::reader()
 {
   std::string line;
 
-  while (std::getline(std::cin, line))
+  while (this->_mainPid == getpid() && std::getline(std::cin, line))
     parseLine(line);
 }
 
@@ -90,5 +91,6 @@ void Plazza::OrderReader::notify(void)
   for (std::list<IObserver *>::iterator it = this->_observers.begin(); it != this->_observers.end(); it++)
     {
       (*it)->update();
+      usleep(100);
     }
 }

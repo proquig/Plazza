@@ -41,18 +41,6 @@ Plazza::Main::~Main()
   delete this->_orderDispatcher;
 }
 
-Plazza::IOrder *Plazza::Main::getOrder(void)
-{
-  IOrder *order;
-
-  if (this->_ordersQueue->tryPop(&order))
-    {
-      return order;
-    }
-  else
-    return nullptr;
-}
-
 void Plazza::Main::update()
 {
   IOrder *order;
