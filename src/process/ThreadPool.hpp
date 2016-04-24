@@ -64,7 +64,6 @@ namespace Plazza
     for (std::vector<std::thread *>::iterator it = this->_threads.begin(); it != this->_threads.end(); it++)
       if ((*it)->joinable())
 	(*it)->join();
-    std::cout << "ThreadPool: destroy" << std::endl;
   }
 
   void ThreadPool::enqueue(IOrder &order)

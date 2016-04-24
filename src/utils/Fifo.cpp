@@ -23,16 +23,17 @@ Plazza::Fifo::~Fifo()
 
 void 		Plazza::Fifo::write(const std::string &message)
 {
-  this->_out.open(this->_path.c_str(), std::ofstream::out);
+  if (!this->_out.is_open())
+    this->_out.open(this->_path.c_str(), std::ofstream::out);
   this->_out << message << std::endl;
-  this->_out.close();
 }
 
 std::string	Plazza::Fifo::read()
 {
   std::string message;
 
-  this->_in.open(this->_path.c_str(), std::ifstream::in);
+  if (!this->_in.is_open())
+    this->_in.open(this->_path.c_str(), std::ifstream::in);
   std::getline(this->_in, message);
   return message;
 }

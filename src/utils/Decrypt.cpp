@@ -54,7 +54,7 @@ std::vector<std::string>	Plazza::Decrypt::decryptXor(const std::string& line)
       key[1] = i % 256;
       j = 0;
       line_tmp = line;
-      if (IS_PRINTABLE((char)(key[0] ^ line_tmp[0])) && IS_PRINTABLE((char)(key[1] ^ line_tmp[1])))
+      if (IS_PRINTABLE((key[0] ^ line_tmp[0])) && IS_PRINTABLE((key[1] ^ line_tmp[1])))
 	{
 	  while (j < line_tmp.length())
 	    {

@@ -22,7 +22,7 @@ void Plazza::OrderDispatcher::dispatch(const IOrder &order)
   pid_t mainPid = getpid();
 
   if (this->_process.empty() || (process = findProcess()) == nullptr)
-    process = this->createProcess(order);
+    process = this->createProcess();
   if (mainPid == getpid())
     process->sendOrder(order);
 }
@@ -30,13 +30,15 @@ void Plazza::OrderDispatcher::dispatch(const IOrder &order)
 Plazza::Process *Plazza::OrderDispatcher::findProcess()
 {
   for (std::list<Process *>::iterator it = this->_process.begin(); it != this->_process.end(); it++)
-    if ((*it)->canAcceptOrder())
+    if ((*it)->askCanAcceptOrder())
       return (*it);
   return nullptr;
 }
 
-Plazza::Process *Plazza::OrderDispatcher::createProcess(const IOrder &order)
+Plazza::Process *Plazza::OrderDispatcher::createProcess()
 {
-  this->_process.push_back(new Process(this->_maxThreads, order.getOrder() + " " + order.getFile()));
+  static int processId = 0;
+
+  this->_process.push_back(new Process(this->_maxThreads, processId++));
   return this->_process.back();
 }

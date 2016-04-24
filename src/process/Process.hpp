@@ -10,7 +10,10 @@
 #include <ctime>
 #include <IObserver.hpp>
 #include <thread>
+#include <vector>
+#include <ISafeQueue.hpp>
 #include "../utils/Fork.hpp"
+#include "../utils/Fifo.hpp"
 
 namespace Plazza
 {
@@ -21,16 +24,19 @@ namespace Plazza
     std::time_t _lastAction;
     ThreadPool *_pool;
     size_t _ordersRunning;
-    std::thread *_timeTracker;
+    std::vector<Fifo *> _fifos;
+    Fifo *_writer;
+    Fifo *_reader;
+    size_t _maxThreads;
 
    public:
     Fork *_fork;
 
-    Process(size_t maxThreads, std::string message);
+    Process(size_t maxThreads, int processId);
 
     ~Process();
 
-    bool canAcceptOrder();
+    bool askCanAcceptOrder();
 
     void sendOrder(const IOrder &order);
 
@@ -40,6 +46,8 @@ namespace Plazza
 
    private:
     void timeTracker();
+
+    void messageReader();
 
     void parseMessage(const std::string message);
 

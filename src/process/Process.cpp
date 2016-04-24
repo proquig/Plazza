@@ -10,34 +10,53 @@
 #include "../utils/Decrypt.hpp"
 #include "ThreadPool.hpp"
 
-Plazza::Process::Process(size_t maxThreads, std::string message)
-	: _lastAction(std::time(nullptr)), _pool(nullptr), _ordersRunning(0)
+Plazza::Process::Process(size_t maxThreads, int processId)
+	: _lastAction(std::time(nullptr)), _pool(nullptr), _ordersRunning(0), _maxThreads(maxThreads)
 {
+  this->_fifos.push_back(new Fifo("plazza-" + std::to_string(processId) + "main-process"));
+  this->_fifos.push_back(new Fifo("plazza-" + std::to_string(processId) + "process-main"));
+
   this->_fork = new Fork();
   if (this->_fork->isChild())
     {
+      this->_writer = this->_fifos[0];
+      this->_reader = this->_fifos[1];
       this->_pool = new ThreadPool(maxThreads, &parseFile);
       this->_pool->addObserver(this);
-      parseMessage(message);
-      this->_timeTracker = new std::thread(&Process::timeTracker, this);
+      new std::thread(&Process::timeTracker, this);
+      new std::thread(&Process::messageReader, this);
+    }
+  else
+    {
+      this->_reader = this->_fifos[0];
+      this->_writer = this->_fifos[1];
     }
 }
 
 Plazza::Process::~Process()
 {
+  this->_reader->write("end");
+  this->_writer->write("end");
+  delete this->_fifos[0];
+  delete this->_fifos[1];
   if (this->_pool != nullptr)
     delete this->_pool;
   delete this->_fork;
 }
 
-bool Plazza::Process::canAcceptOrder()
+bool Plazza::Process::askCanAcceptOrder()
 {
-  return false;
+  this->_writer->write("canAcceptOrder");
+  usleep(100);
+  std::string response = this->_reader->read();
+  return response == "true";
 }
 
 void Plazza::Process::sendOrder(const IOrder &order)
 {
-  (void)order;
+  std::stringstream stream("");
+  stream << order;
+  this->_writer->write(stream.str());
 }
 
 void Plazza::Process::stop()
@@ -59,13 +78,27 @@ void Plazza::Process::timeTracker()
     {
       if (this->_ordersRunning == 0)
 	{
-	  if (std::time(nullptr) - this->_lastAction >= 2)
+	  if (std::time(nullptr) - this->_lastAction >= 4)
 	    {
 	      this->stop();
 	      return;
 	    }
 	}
       usleep(100);
+    }
+}
+
+void Plazza::Process::messageReader()
+{
+  for (;;)
+    {
+      std::string message = this->_reader->read();
+      if (message.length())
+	{
+	  if (message == "end")
+	    break;
+	  parseMessage(message);
+	}
     }
 }
 
@@ -78,7 +111,7 @@ void Plazza::Process::parseMessage(const std::string message)
 
   std::getline(stream, command, ' ');
   if (command == "canAcceptOrder")
-    { }
+    this->_writer->write(this->_ordersRunning < (this->_maxThreads * 2) ? "true" : "false");
   else
     {
       std::getline(stream, file, ' ');
@@ -114,5 +147,4 @@ void Plazza::Process::parseFile(const IOrder &order)
       std::cerr << e.what() << std::endl;
     }
 }
-
 
