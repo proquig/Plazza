@@ -29,6 +29,7 @@ namespace Plazza
     IConnector *_writer;
     IConnector *_reader;
     size_t _maxThreads;
+    bool _terminated;
 
    public:
     Fork *_fork;
@@ -49,6 +50,8 @@ namespace Plazza
     void timeTracker();
 
     void messageReader();
+
+    void waitEnd(pid_t pid);
 
     void parseMessage(const std::string message);
 

@@ -13,7 +13,10 @@ Plazza::OrderDispatcher::OrderDispatcher(size_t maxThreads) : _maxThreads(maxThr
 Plazza::OrderDispatcher::~OrderDispatcher()
 {
   for (std::list<Process *>::iterator it = this->_process.begin(); it != this->_process.end(); it++)
-    waitpid((*it)->_fork->get_pid(), NULL, 0);
+    {
+      if (*it && (*it)->_fork)
+	waitpid((*it)->_fork->get_pid(), NULL, 0);
+    }
 }
 
 void Plazza::OrderDispatcher::dispatch(const IOrder &order)

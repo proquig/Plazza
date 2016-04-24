@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <wait.h>
 #include "Process.hpp"
 #include "../utils/Factory.hpp"
 #include "../utils/Parser.hpp"
@@ -11,7 +12,8 @@
 #include "ThreadPool.hpp"
 
 Plazza::Process::Process(size_t maxThreads, int processId)
-	: _lastAction(std::time(nullptr)), _pool(nullptr), _ordersRunning(0), _maxThreads(maxThreads)
+	: _lastAction(std::time(nullptr)), _pool(nullptr), _ordersRunning(0), _maxThreads(maxThreads),
+	  _terminated(false)
 {
   this->_fifos.push_back(new Fifo("plazza-" + std::to_string(processId) + "main-process"));
   this->_fifos.push_back(new Fifo("plazza-" + std::to_string(processId) + "process-main"));
@@ -30,6 +32,7 @@ Plazza::Process::Process(size_t maxThreads, int processId)
     {
       this->_reader = this->_fifos[0];
       this->_writer = this->_fifos[1];
+      new std::thread(&Process::waitEnd, this, this->_fork->get_pid());
     }
 }
 
@@ -46,6 +49,8 @@ Plazza::Process::~Process()
 
 bool Plazza::Process::askCanAcceptOrder()
 {
+  if (this->_terminated)
+    return false;
   this->_writer->write("canAcceptOrder");
   usleep(100);
   std::string response = this->_reader->read();
@@ -102,6 +107,12 @@ void Plazza::Process::messageReader()
     }
 }
 
+void Plazza::Process::waitEnd(pid_t pid)
+{
+  waitpid(pid, NULL, 0);
+  this->_terminated = true;
+}
+
 void Plazza::Process::parseMessage(const std::string message)
 {
   std::stringstream stream(message);
@@ -147,4 +158,3 @@ void Plazza::Process::parseFile(const IOrder &order)
       std::cerr << e.what() << std::endl;
     }
 }
-
