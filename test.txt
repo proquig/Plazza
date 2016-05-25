@@ -1,0 +1,2 @@
+web/emulatari.free.fr/accueil.html web/freddo.chez.com/index2.html PHONE_NUMBER
+web/freddo.chez.com/Intros/Compil01A.html web/freddo.chez.com/Atari/Galerie/Divers/Divers.html EMAIL_ADDRESS
